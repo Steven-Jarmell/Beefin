@@ -1,3 +1,4 @@
 microservices-parent/**/target
 microservices-parent/**/resources
-microservices-parent/**/.idea
+
+**.idea

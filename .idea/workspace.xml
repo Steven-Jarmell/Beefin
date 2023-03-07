@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4c5908df-9901-40e6-8f4d-cd800f2eaaef" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/microservices-parent/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/microservices-parent/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/microservices-parent/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/microservices-parent/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/microservices-parent/user-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/microservices-parent/user-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/microservices-parent/user-service/src/main/java/com/beefin/services/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/microservices-parent/user-service/target/classes/com/beefin/services/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
