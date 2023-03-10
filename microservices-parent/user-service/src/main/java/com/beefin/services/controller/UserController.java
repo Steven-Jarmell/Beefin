@@ -36,31 +36,29 @@ public class UserController {
         }
     }
 
-    @GetMapping
+    @GetMapping (value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public List<UserResponse> getAllUsers() throws ExecutionException, InterruptedException {
-        List<UserResponse> allUsers = userService.getAllUsers();
+    public List<UserResponse> getUsers(@RequestParam (value = "id", required = false) String id) throws ExecutionException, InterruptedException {
+        // If a GET request is made with an id provided, only get that user if they exist
+        if (id != null) {
+            List<UserResponse> user = userService.getUser(id);
 
-        if (allUsers == null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unexpected error occured while getting users");
+            if (user != null) {
+                return user;
+            } else {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User does not exist or there was a server error");
+            }
+        // If no ID is provided, return all the users in the database
         } else {
-            return allUsers;
+            List<UserResponse> allUsers = userService.getAllUsers();
+
+            if (allUsers == null) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unexpected error occured while getting users");
+            } else {
+                return allUsers;
+            }
         }
     }
-
-    /*
-    @GetMapping
-    @ResponseStatus(HttpStatus.OK)
-    public UserResponse getOneUser(@RequestParam String userID) throws ExecutionException, InterruptedException {
-        UserResponse user = userService.getUser(userID);
-
-        if (user != null) {
-            return user;
-        } else {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User does not exist or there was a server error");
-        }
-    }
-    */
 
     @PutMapping
     public ResponseEntity<String> updateUser(@RequestBody UserRequest userRequest) throws ExecutionException, InterruptedException {

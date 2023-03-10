@@ -154,7 +154,14 @@ public class UserService {
         }
     }
 
-    public UserResponse getUser(String userID) throws ExecutionException, InterruptedException {
+    /**
+     * Method to get a single user from the database
+     * @param userID the ID of the user to retrieve
+     * @return ArrayList of size 1 with the User retrieved
+     * @throws ExecutionException
+     * @throws InterruptedException
+     */
+    public List<UserResponse> getUser(String userID) throws ExecutionException, InterruptedException {
         try {
             Firestore db = FirestoreClient.getFirestore();
 
@@ -165,7 +172,12 @@ public class UserService {
             DocumentSnapshot document = future.get();
 
             if (document.exists()) {
-                return mapToUserResponse(document.toObject(User.class));
+                UserResponse user = mapToUserResponse(document.toObject(User.class));
+
+                List<UserResponse> list = new ArrayList<UserResponse>(1);
+                list.add(user);
+
+                return list;
             } else {
                 return null;
             }
