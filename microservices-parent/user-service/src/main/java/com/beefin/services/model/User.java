@@ -14,6 +14,7 @@ import java.util.Date;
 @AllArgsConstructor // Generates a constructor with all parameters
 @Builder // Lets you produce code to have your class instantiable
 public class User {
+    private String id;
     private String name;
     private String email;
     private String password;

@@ -36,15 +36,16 @@ public class UserService {
         try {
             Firestore db = FirestoreClient.getFirestore();
 
-            // Check if user already exists in the database
-            DocumentReference docRef = db.collection(COL_NAME).document(userData.getEmail());
+            // Asynchronously check if user already exists in the database
+            ApiFuture<QuerySnapshot> future = db.collection(COL_NAME).whereEqualTo("email", userData.getEmail()).get();
 
-            ApiFuture<DocumentSnapshot> future = docRef.get();
+            // future.get() blocks on response
+            List<QueryDocumentSnapshot> documents = future.get().getDocuments();
 
-            boolean duplicate = future.get().exists();
+            boolean duplicate = documents.isEmpty();
 
             // If user exists return CONFLICT
-            if (duplicate) {
+            if (!duplicate) {
                 return HttpStatus.CONFLICT;
             } else {
                 // If they don't exist, add them and return CREATED

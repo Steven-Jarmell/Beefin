@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 
 @RestController
@@ -38,8 +39,17 @@ public class UserController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<UserResponse> getUsers() throws ExecutionException, InterruptedException {
+    public List<UserResponse> getUsers(@RequestParam Optional<String> id) throws ExecutionException, InterruptedException {
         // If a GET request is made with an id provided, only get that user if they exist
+        if (id.isPresent()) {
+            List<UserResponse> user = userService.getUser(id.get());
+
+            if (user == null) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User does not exist");
+            } else {
+                return user;
+            }
+        } else {
             List<UserResponse> allUsers = userService.getAllUsers();
 
             if (allUsers == null) {
@@ -47,6 +57,7 @@ public class UserController {
             } else {
                 return allUsers;
             }
+        }
     }
 
     @PutMapping
