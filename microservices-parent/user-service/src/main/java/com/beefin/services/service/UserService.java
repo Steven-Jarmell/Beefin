@@ -18,9 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.concurrent.ExecutionException;
-import java.util.stream.Stream;
 
 @Service
 public class UserService {
@@ -67,7 +65,7 @@ public class UserService {
      * @throws InterruptedException
      */
     public List<UserResponse> getAllUsers() throws ExecutionException, InterruptedException {
-        try {
+
             Firestore db = FirestoreClient.getFirestore();
 
             // Asynchronously retrieve all documents
@@ -77,18 +75,15 @@ public class UserService {
             List<QueryDocumentSnapshot> usersFromDB = future.get().getDocuments();
 
             // Make a new ArrayList of the same size as the number of users
-            List<User> convertedUsers = new ArrayList(usersFromDB.size());
+            List<UserResponse> convertedUsers = new ArrayList(usersFromDB.size());
 
             // For each user pulled from the database, turn them back into a User object
             for (QueryDocumentSnapshot user : usersFromDB) {
-                convertedUsers.add(user.toObject(User.class));
+                convertedUsers.add(mapToUserResponse(user.getId(), user.toObject(User.class)));
             }
 
             // Convert the user objects to the UserResponse object
-            return convertedUsers.stream().map(this::mapToUserResponse).toList();
-        } catch (Exception e) {
-            return null;
-        }
+            return convertedUsers;
     }
 
     /**
@@ -96,9 +91,9 @@ public class UserService {
      * @param user User from the database
      * @return A UserResponse object representing that user
      */
-    private UserResponse mapToUserResponse (User user) {
+    private UserResponse mapToUserResponse (String userID, User user) {
         return UserResponse.builder()
-                .id(user.getId())
+                .id(userID)
                 .email(user.getEmail())
                 .name(user.getName())
                 .build();
@@ -172,7 +167,7 @@ public class UserService {
             DocumentSnapshot document = future.get();
 
             if (document.exists()) {
-                UserResponse user = mapToUserResponse(document.toObject(User.class));
+                UserResponse user = mapToUserResponse(document.getId(), document.toObject(User.class));
 
                 List<UserResponse> list = new ArrayList<UserResponse>(1);
                 list.add(user);

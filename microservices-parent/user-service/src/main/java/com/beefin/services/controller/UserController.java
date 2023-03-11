@@ -36,20 +36,10 @@ public class UserController {
         }
     }
 
-    @GetMapping (value = "/{id}")
+    @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<UserResponse> getUsers(@RequestParam (value = "id", required = false) String id) throws ExecutionException, InterruptedException {
+    public List<UserResponse> getUsers() throws ExecutionException, InterruptedException {
         // If a GET request is made with an id provided, only get that user if they exist
-        if (id != null) {
-            List<UserResponse> user = userService.getUser(id);
-
-            if (user != null) {
-                return user;
-            } else {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User does not exist or there was a server error");
-            }
-        // If no ID is provided, return all the users in the database
-        } else {
             List<UserResponse> allUsers = userService.getAllUsers();
 
             if (allUsers == null) {
@@ -57,7 +47,6 @@ public class UserController {
             } else {
                 return allUsers;
             }
-        }
     }
 
     @PutMapping
