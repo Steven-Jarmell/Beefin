@@ -17,8 +17,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
+import java.util.stream.Stream;
 
 @Service
 public class UserService {
@@ -66,7 +69,7 @@ public class UserService {
      * @throws InterruptedException
      */
     public List<UserResponse> getAllUsers() throws ExecutionException, InterruptedException {
-
+        try {
             Firestore db = FirestoreClient.getFirestore();
 
             // Asynchronously retrieve all documents
@@ -85,6 +88,10 @@ public class UserService {
 
             // Convert the user objects to the UserResponse object
             return convertedUsers;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     /**
@@ -108,17 +115,51 @@ public class UserService {
      * @throws InterruptedException
      */
     public HttpStatus update(UserRequest userData) throws ExecutionException, InterruptedException {
-        try {
+        try{
             Firestore db = FirestoreClient.getFirestore();
+
+            // Ensure the user exists
+            DocumentReference docRef = db.collection(COL_NAME).document(userData.getId());
+            // asynchronously retrieve the document
+            ApiFuture<DocumentSnapshot> future = docRef.get();
+            // block on response
+            DocumentSnapshot document = future.get();
+
+            // If it does not exist, return BAD_REQUEST
+            if (!document.exists()) {
+                return HttpStatus.BAD_REQUEST;
+            }
+
+            // Ensure the email won't conflict with another user's email
+            // Asynchronously check if user with new email already exists in the database
+            ApiFuture<QuerySnapshot> duplicateUser = db.collection(COL_NAME).whereEqualTo("email", userData.getEmail()).get();
+
+            // future.get() blocks on response
+            List<QueryDocumentSnapshot> documents = duplicateUser.get().getDocuments();
+
+            boolean conflict = documents.isEmpty();
+
+            // If the email they try to update to already exists, return BAD_REQUEST
+            if (!conflict) {
+                return HttpStatus.BAD_REQUEST;
+            }
+
+            Map<String, Object> updatedUser = new HashMap<>();
+
+            if (userData.getName() != null) updatedUser.put("name", userData.getName());
+            if (userData.getEmail() != null) updatedUser.put("email", userData.getEmail());
+            if (userData.getPassword() != null) updatedUser.put("password", userData.getPassword());
 
             // Get the user and update the attributes that have changed
             ApiFuture<WriteResult> collectionsApiFuture = db.collection(COL_NAME)
                     .document(userData.getId())
-                    .set(userData);
+                    .update(updatedUser);
 
+            // Ideally would want to check to make sure the update was successful, but the documentation is hard to find
             return HttpStatus.OK;
         // If there is any exception, throw an internal server error
         } catch (Exception e) {
+            e.printStackTrace();
             return HttpStatus.INTERNAL_SERVER_ERROR;
         }
     }
@@ -146,6 +187,7 @@ public class UserService {
             }
         // If there is any error, return INTERNAL_SERVER_ERROR
         } catch (Exception e) {
+            e.printStackTrace();
             return HttpStatus.INTERNAL_SERVER_ERROR;
         }
     }

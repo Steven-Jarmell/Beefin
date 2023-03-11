@@ -3,6 +3,7 @@ package com.beefin.services.controller;
 import com.beefin.services.dto.UserRequest;
 import com.beefin.services.dto.UserResponse;
 import com.beefin.services.service.UserService;
+import com.google.api.Http;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,7 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<String> createUser(@RequestBody UserRequest userRequest) throws ExecutionException, InterruptedException {
-        if ( userRequest.getEmail().isEmpty() || userRequest.getPassword().isEmpty() || userRequest.getName().isEmpty()) {
+        if ( userRequest.getEmail() == null || userRequest.getPassword() == null || userRequest.getName() == null) {
             return new ResponseEntity<String>("All fields required", HttpStatus.BAD_REQUEST);
         }
 
@@ -62,10 +63,16 @@ public class UserController {
 
     @PutMapping
     public ResponseEntity<String> updateUser(@RequestBody UserRequest userRequest) throws ExecutionException, InterruptedException {
+        if (userRequest.getId() == null) {
+            return new ResponseEntity<String>("Did not specify user ID in update", HttpStatus.BAD_REQUEST);
+        }
+
         HttpStatus code = userService.update(userRequest);
 
         if (code == HttpStatus.OK) {
             return new ResponseEntity<String>("User was updated successfully", code);
+        } else if (code == HttpStatus.BAD_REQUEST){
+            return new ResponseEntity<String>("User either does not exist or there is an email conflict", code);
         } else {
             return new ResponseEntity<String>("Unexpected error occurred while updating", code);
         }
@@ -73,7 +80,7 @@ public class UserController {
 
     @DeleteMapping
     public ResponseEntity<String> deleteUser(@RequestParam String userID) throws ExecutionException, InterruptedException {
-        if ( userID.isEmpty()) {
+        if (userID == null) {
             return new ResponseEntity<String>("All userID required", HttpStatus.BAD_REQUEST);
         }
 
