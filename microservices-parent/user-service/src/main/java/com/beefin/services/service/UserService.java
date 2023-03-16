@@ -1,4 +1,3 @@
-package com.beefin.services.service;
 /**
  * UserService class to implement CRUD Operations.
  * Used in UserController class
@@ -6,6 +5,7 @@ package com.beefin.services.service;
  * @author Steven Jarmell
  * @version 1.0.0
  */
+package com.beefin.services.service;
 
 import com.beefin.services.dto.UserRequest;
 import com.beefin.services.dto.UserResponse;
@@ -13,29 +13,30 @@ import com.beefin.services.model.User;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
-import java.util.stream.Stream;
 
 @Service
 public class UserService {
 
     public static final String COL_NAME = "users";
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     /**
      * Create Operation on User Entity
      * @param userData UserRequest object containing the data from the request
      * @return CONFLICT if duplicate exists, CREATED if successfully created, and INTERNAL_SERVER_ERROR if unexpected error
-     * @throws ExecutionException
-     * @throws InterruptedException
      */
-    public HttpStatus createUser(UserRequest userData) throws ExecutionException, InterruptedException {
+    public User createUser(UserRequest userData) {
         try {
             Firestore db = FirestoreClient.getFirestore();
 
@@ -49,26 +50,38 @@ public class UserService {
 
             // If user exists return CONFLICT
             if (!duplicate) {
-                return HttpStatus.CONFLICT;
+                //return HttpStatus.CONFLICT;
+                return null;
             } else {
                 // If they don't exist, add them and return CREATED
+                userData.setPassword(passwordEncoder.encode(userData.getPassword()));
                 ApiFuture<DocumentReference> addedDocRef = db.collection(COL_NAME).add(userData);
-                return HttpStatus.CREATED;
+
+                // Definitely a better way to do this
+                String addedDocId = addedDocRef.get().getId();
+
+                DocumentReference docRef = db.collection(COL_NAME).document(addedDocId);
+
+                ApiFuture<DocumentSnapshot> newFuture = docRef.get();
+
+                DocumentSnapshot document = newFuture.get();
+
+                return document.toObject(User.class);
+                //return HttpStatus.CREATED;
             }
         // If there's any unexpected error, print the stack trace and return INTERNAL_SERVER_ERROR
         } catch (Exception e) {
             e.printStackTrace();
-            return HttpStatus.INTERNAL_SERVER_ERROR;
+            //return HttpStatus.INTERNAL_SERVER_ERROR;
+            return null;
         }
     }
 
     /**
      * Read Operation on User Entity
      * @return All users in the database
-     * @throws ExecutionException
-     * @throws InterruptedException
      */
-    public List<UserResponse> getAllUsers() throws ExecutionException, InterruptedException {
+    public List<UserResponse> getAllUsers() {
         try {
             Firestore db = FirestoreClient.getFirestore();
 
@@ -79,7 +92,7 @@ public class UserService {
             List<QueryDocumentSnapshot> usersFromDB = future.get().getDocuments();
 
             // Make a new ArrayList of the same size as the number of users
-            List<UserResponse> convertedUsers = new ArrayList(usersFromDB.size());
+            List<UserResponse> convertedUsers = new ArrayList<>(usersFromDB.size());
 
             // For each user pulled from the database, turn them back into a User object
             for (QueryDocumentSnapshot user : usersFromDB) {
@@ -103,7 +116,10 @@ public class UserService {
         return UserResponse.builder()
                 .id(userID)
                 .email(user.getEmail())
-                .name(user.getName())
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .password(user.getPassword())
+                .roles(user.getRoles())
                 .build();
     }
 
@@ -111,10 +127,8 @@ public class UserService {
      * Update Operation on User Entity
      * @param userData User to be updated
      * @return String representing the timestamp of when the user was created
-     * @throws ExecutionException
-     * @throws InterruptedException
      */
-    public HttpStatus update(UserRequest userData) throws ExecutionException, InterruptedException {
+    public HttpStatus update(UserRequest userData) {
         try{
             Firestore db = FirestoreClient.getFirestore();
 
@@ -146,7 +160,8 @@ public class UserService {
 
             Map<String, Object> updatedUser = new HashMap<>();
 
-            if (userData.getName() != null) updatedUser.put("name", userData.getName());
+            if (userData.getFirstName() != null) updatedUser.put("firstname", userData.getFirstName());
+            if (userData.getLastName() != null) updatedUser.put("lastname", userData.getLastName());
             if (userData.getEmail() != null) updatedUser.put("email", userData.getEmail());
             if (userData.getPassword() != null) updatedUser.put("password", userData.getPassword());
 
@@ -169,7 +184,7 @@ public class UserService {
      * @param userID ID of user to be deleted
      * @return String stating that the User was deleted
      */
-    public HttpStatus deleteUser(String userID) throws ExecutionException, InterruptedException {
+    public HttpStatus deleteUser(String userID) {
         try {
             Firestore db = FirestoreClient.getFirestore();
 
@@ -182,7 +197,7 @@ public class UserService {
             if (deleteResult.isDone()) {
                 return HttpStatus.OK;
             } else {
-            // Make sure the request deleting was valid aswell
+            // Make sure the request deleting was valid as well
                 return HttpStatus.BAD_REQUEST;
             }
         // If there is any error, return INTERNAL_SERVER_ERROR
@@ -196,10 +211,8 @@ public class UserService {
      * Method to get a single user from the database
      * @param userID the ID of the user to retrieve
      * @return ArrayList of size 1 with the User retrieved
-     * @throws ExecutionException
-     * @throws InterruptedException
      */
-    public List<UserResponse> getUser(String userID) throws ExecutionException, InterruptedException {
+    public List<UserResponse> getUser(String userID) {
         try {
             Firestore db = FirestoreClient.getFirestore();
 
@@ -212,7 +225,7 @@ public class UserService {
             if (document.exists()) {
                 UserResponse user = mapToUserResponse(document.getId(), document.toObject(User.class));
 
-                List<UserResponse> list = new ArrayList<UserResponse>(1);
+                List<UserResponse> list = new ArrayList<>(1);
                 list.add(user);
 
                 return list;

@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @Data // Bundles features of toString, getter/setter, RequiredArgsConstructor
 @NoArgsConstructor // Generates a constructor with no parameters
@@ -15,10 +16,12 @@ import java.util.Date;
 @Builder // Lets you produce code to have your class instantiable
 public class User {
     private String id;
-    private String name;
+    private String firstName;
+    private String lastName;
     private String email;
     private String password;
-    private boolean isVerified;
+    private List<String> roles;
+    private boolean isVerified = false;
     @ServerTimestamp
     private Date createdAt;
     @ServerTimestamp

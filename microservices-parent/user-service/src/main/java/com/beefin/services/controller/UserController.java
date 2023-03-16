@@ -2,9 +2,14 @@ package com.beefin.services.controller;
 
 import com.beefin.services.dto.UserRequest;
 import com.beefin.services.dto.UserResponse;
+import com.beefin.services.model.User;
 import com.beefin.services.service.UserService;
 import com.google.api.Http;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.Response;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,23 +24,29 @@ import java.util.concurrent.ExecutionException;
 @RequiredArgsConstructor
 public class UserController {
 
+    @Autowired
     private final UserService userService;
 
-    @PostMapping
+    @Autowired
+    private ApplicationEventPublisher publisher;
+
+    @PostMapping()
     public ResponseEntity<String> createUser(@RequestBody UserRequest userRequest) throws ExecutionException, InterruptedException {
-        if ( userRequest.getEmail() == null || userRequest.getPassword() == null || userRequest.getName() == null) {
+        if ( userRequest.getEmail() == null || userRequest.getPassword() == null || userRequest.getFirstName() == null || userRequest.getLastName() == null) {
             return new ResponseEntity<String>("All fields required", HttpStatus.BAD_REQUEST);
         }
 
-        HttpStatus code = userService.createUser(userRequest);
+        User createdUser = userService.createUser(userRequest);
 
-        if (code == HttpStatus.CREATED) {
-            return new ResponseEntity<String>("User Created", code);
-        } else if (code == HttpStatus.CONFLICT) {
-            return new ResponseEntity<String>("User already exists", code);
+        if (createdUser == null) {
+            return new ResponseEntity<String>("Problem creating user", HttpStatus.BAD_REQUEST);
         } else {
-            return new ResponseEntity<String>("Unexpected error occurred", code);
+            return new ResponseEntity<String>("Successfully created user", HttpStatus.CREATED);
         }
+    }
+
+    private String applicationUrl(HttpServletRequest request) {
+        return "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
     }
 
     @GetMapping
