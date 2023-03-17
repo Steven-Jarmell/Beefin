@@ -1,0 +1,42 @@
+:root{
+    width: 94vw;
+}
+.profile-container{
+    display: flex;
+    text-align: center;
+    /* padding: 4vw; */
+    border-radius: 50px;
+    background-color: transparent;
+    height: fit-content;
+    color: black;
+    margin: 0 auto;
+    
+  }
+
+.profile-container-child{
+    flex: 1;
+    box-shadow: 2px 2px 2px 2px black;
+    border-radius: 50px;
+    margin: 1%;
+    background-color: #CCE6F4;
+}
+
+
+.stats-container{
+    display: flex;
+    width: 100;
+  }
+
+.stats-container-child{
+    flex: 1;
+    margin: 2vw;
+}
+
+#profilePic {
+    width: 150px;
+    height: 150px;
+}
+
+div{
+    margin: 3vh 0vh;
+}

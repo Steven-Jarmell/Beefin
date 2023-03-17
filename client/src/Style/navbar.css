@@ -1,0 +1,28 @@
+:root{
+    display: flex;
+    
+}
+
+.navbar-container{
+    position: sticky;
+    top: 10px;
+    left: 0;
+    width: 100vw;
+    max-width: 100%;
+}
+
+.navbar-buttons-container{
+    width: 100;
+    padding: 1vw;
+    border-radius: 50px;
+    
+}
+
+.left{
+    margin-left: 0;
+}
+
+.right{
+    margin-left: 20%;
+}
+
