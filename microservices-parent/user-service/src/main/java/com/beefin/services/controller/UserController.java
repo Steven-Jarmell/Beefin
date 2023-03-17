@@ -1,8 +1,11 @@
 package com.beefin.services.controller;
 
+import com.beefin.services.dto.AuthenticationRequest;
+import com.beefin.services.dto.AuthenticationResponse;
 import com.beefin.services.dto.UserRequest;
 import com.beefin.services.dto.UserResponse;
 import com.beefin.services.model.User;
+import com.beefin.services.service.AuthenticationService;
 import com.beefin.services.service.UserService;
 import com.google.api.Http;
 import jakarta.servlet.http.HttpServletRequest;
@@ -28,25 +31,30 @@ public class UserController {
     private final UserService userService;
 
     @Autowired
+    private final AuthenticationService authenticationService;
+
+    @Autowired
     private ApplicationEventPublisher publisher;
 
-    @PostMapping()
-    public ResponseEntity<String> createUser(@RequestBody UserRequest userRequest) throws ExecutionException, InterruptedException {
+    @PostMapping("/register")
+    public ResponseEntity<AuthenticationResponse> createUser(@RequestBody UserRequest userRequest) throws ExecutionException, InterruptedException {
         if ( userRequest.getEmail() == null || userRequest.getPassword() == null || userRequest.getFirstName() == null || userRequest.getLastName() == null) {
-            return new ResponseEntity<String>("All fields required", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<AuthenticationResponse>(new AuthenticationResponse(), HttpStatus.BAD_REQUEST);
         }
 
-        User createdUser = userService.createUser(userRequest);
+        //User createdUser = userService.createUser(userRequest);
+        AuthenticationResponse response = authenticationService.register(userRequest);
 
-        if (createdUser == null) {
-            return new ResponseEntity<String>("Problem creating user", HttpStatus.BAD_REQUEST);
+        if (response == null) {
+            return new ResponseEntity<AuthenticationResponse>((AuthenticationResponse) null, HttpStatus.BAD_REQUEST);
         } else {
-            return new ResponseEntity<String>("Successfully created user", HttpStatus.CREATED);
+            return new ResponseEntity<AuthenticationResponse>(response, HttpStatus.OK);
         }
     }
 
-    private String applicationUrl(HttpServletRequest request) {
-        return "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
+    @PostMapping("/authenticate")
+    public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request) {
+        return ResponseEntity.ok(authenticationService.authenticate(request));
     }
 
     @GetMapping

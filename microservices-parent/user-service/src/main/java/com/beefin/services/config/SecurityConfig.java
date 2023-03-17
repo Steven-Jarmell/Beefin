@@ -1,39 +1,54 @@
 package com.beefin.services.config;
 
+import jakarta.servlet.Filter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
 
+    private final JwtAuthenticationFilter jwtAuthFilter;
+
     @Bean
-    // Authentication
     public UserDetailsService userDetailsService() {
         return new UserIntoUserDetailsService();
     }
 
-    @Bean
+    @Bean // Bean responsible for configuring all the Http security of the application
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http.csrf().disable()
-                // Make sure that any requests to /api/users/** is authenticated
+        http
+                .csrf()
+                .disable() // Disable csrf verification
                 .authorizeHttpRequests()
-                .requestMatchers("/api/users").permitAll()
+                .requestMatchers("/api/users/**", "/api/users")
+                .permitAll() // Allow for the whitelist paths to not require authentication
                 .and()
-                .authorizeHttpRequests().requestMatchers("/")
-                .authenticated().and().formLogin().and()
-                .build();
+                .authorizeHttpRequests()
+                .anyRequest()
+                .authenticated() // Require anything not in the whitelist to be authenticated
+                .and()
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // Make session stateless, so spring creates a new session for each request
+                .and()
+                .authenticationProvider(authenticationProvider())
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class); // We want to call this filter that we made to update security context
+
+        return http.build();
     }
 
     @Bean
@@ -49,4 +64,8 @@ public class SecurityConfig {
         return authenticationProvider;
     }
 
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+        return config.getAuthenticationManager();
+    }
 }

@@ -72,7 +72,6 @@ public class UserService {
         // If there's any unexpected error, print the stack trace and return INTERNAL_SERVER_ERROR
         } catch (Exception e) {
             e.printStackTrace();
-            //return HttpStatus.INTERNAL_SERVER_ERROR;
             return null;
         }
     }
