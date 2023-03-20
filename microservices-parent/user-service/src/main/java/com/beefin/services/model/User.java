@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
 @Builder // Lets you produce code to have your class instantiable
 public class User implements UserDetails {
 
-    @DocumentId
     private String id;
 
     private String firstName;
