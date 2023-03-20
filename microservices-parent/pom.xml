@@ -19,7 +19,6 @@
         <module>user-service</module>
         <module>workout-service</module>
         <module>group-service</module>
-        <module>authorization-service</module>
         <module>authentication-service</module>
         <module>api-gateway</module>
     </modules>
