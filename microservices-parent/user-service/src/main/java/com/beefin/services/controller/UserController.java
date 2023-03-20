@@ -107,10 +107,8 @@ public class UserController {
 
         if (code == HttpStatus.OK) {
             return new ResponseEntity<String>("User was deleted successfully", code);
-        } else if (code == HttpStatus.BAD_REQUEST) {
-            return new ResponseEntity<String>("The user to be deleted does not exist", code);
         } else {
-            return new ResponseEntity<String>("Unexpected error occurred while deleting", code);
+            return new ResponseEntity<String>("Unexpected error occurred while deleting or user does not exist", code);
         }
     }
 }
