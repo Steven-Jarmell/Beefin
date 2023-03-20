@@ -1,0 +1,39 @@
+
+.passField {
+    display: inline;
+}
+
+.loginLabel {
+    font-size: 40px;
+}
+
+.emailLabel {
+    padding-right: 260px;
+}
+
+.passLabel {
+    padding-right: 225px;
+}
+
+#email {
+    width: 300px;
+    height: 20px;
+}
+
+#password {
+    width: 300px;
+    height: 20px;
+}
+
+.submitButton {
+    width: 100px;
+    height: 40px;
+    background-color: #00bebc;
+}   
+
+.submitButton:hover {
+    width: 100px;
+    height: 40px;
+    background-color: #fdd302;
+}
+
