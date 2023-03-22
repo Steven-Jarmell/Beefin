@@ -14,7 +14,9 @@ import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -28,53 +30,7 @@ public class UserService {
 
     public static final String COL_NAME = "users";
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    /**
-     * Create Operation on User Entity
-     * @param userData UserRequest object containing the data from the request
-     * @return CONFLICT if duplicate exists, CREATED if successfully created, and INTERNAL_SERVER_ERROR if unexpected error
-     */
-    public User createUser(UserRequest userData) {
-        try {
-            Firestore db = FirestoreClient.getFirestore();
-
-            // Asynchronously check if user already exists in the database
-            ApiFuture<QuerySnapshot> future = db.collection(COL_NAME).whereEqualTo("email", userData.getEmail()).get();
-
-            // future.get() blocks on response
-            List<QueryDocumentSnapshot> documents = future.get().getDocuments();
-
-            boolean duplicate = documents.isEmpty();
-
-            // If user exists return CONFLICT
-            if (!duplicate) {
-                //return HttpStatus.CONFLICT;
-                return null;
-            } else {
-                // If they don't exist, add them and return CREATED
-                userData.setPassword(passwordEncoder.encode(userData.getPassword()));
-                ApiFuture<DocumentReference> addedDocRef = db.collection(COL_NAME).add(userData);
-
-                // Definitely a better way to do this
-                String addedDocId = addedDocRef.get().getId();
-
-                DocumentReference docRef = db.collection(COL_NAME).document(addedDocId);
-
-                ApiFuture<DocumentSnapshot> newFuture = docRef.get();
-
-                DocumentSnapshot document = newFuture.get();
-
-                return document.toObject(User.class);
-                //return HttpStatus.CREATED;
-            }
-        // If there's any unexpected error, print the stack trace and return INTERNAL_SERVER_ERROR
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
+    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     /**
      * Read Operation on User Entity

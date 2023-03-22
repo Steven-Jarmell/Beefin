@@ -1,6 +1,5 @@
 package com.beefin.services.config;
 
-import jakarta.servlet.Filter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +15,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -32,13 +34,19 @@ public class SecurityConfig {
     @Bean // Bean responsible for configuring all the Http security of the application
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf()
+                .cors().configurationSource(request -> {
+                    CorsConfiguration configuration = new CorsConfiguration();
+                    configuration.setAllowedOrigins(List.of("http://localhost:3000"));
+                    configuration.setAllowedMethods(List.of("*"));
+                    configuration.setAllowedHeaders(List.of("*"));
+                    return configuration;
+                });
+
+        http.csrf()
                 .disable() // Disable csrf verification
                 .authorizeHttpRequests()
                 .requestMatchers("/api/users/register", "/api/users/authenticate")
                 .permitAll() // Allow for the whitelist paths to not require authentication
-                .and()
-                .authorizeHttpRequests()
                 .anyRequest()
                 .authenticated() // Require anything not in the whitelist to be authenticated
                 .and()

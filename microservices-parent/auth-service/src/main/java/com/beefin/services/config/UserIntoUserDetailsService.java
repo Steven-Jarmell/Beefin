@@ -1,7 +1,7 @@
 package com.beefin.services.config;
 
-import com.beefin.services.dto.UserResponse;
 import com.beefin.services.model.User;
+import com.beefin.services.dto.UserResponse;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.QueryDocumentSnapshot;

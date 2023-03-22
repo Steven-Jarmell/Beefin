@@ -2,7 +2,9 @@ package com.beefin.services.config;
 
 import com.beefin.services.model.User;
 import com.google.api.core.ApiFuture;
-import com.google.cloud.firestore.*;
+import com.google.cloud.firestore.Firestore;
+import com.google.cloud.firestore.QueryDocumentSnapshot;
+import com.google.cloud.firestore.QuerySnapshot;
 import com.google.firebase.cloud.FirestoreClient;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

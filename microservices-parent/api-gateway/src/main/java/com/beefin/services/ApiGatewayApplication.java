@@ -1,4 +1,4 @@
-package com.beefin.services.apigateway;
+package com.beefin.services;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
