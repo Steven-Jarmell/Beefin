@@ -33,6 +33,7 @@ public class SecurityConfig {
 
     @Bean // Bean responsible for configuring all the Http security of the application
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
         http.csrf()
                 .disable() // Disable csrf verification
                 .authorizeHttpRequests()
