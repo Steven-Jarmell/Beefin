@@ -8,13 +8,18 @@ import com.beefin.services.model.User;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.security.Key;
 import java.util.List;
 
 @Service
@@ -22,6 +27,9 @@ import java.util.List;
 public class AuthenticationService {
 
     public static final String COL_NAME = "users";
+
+    @Value("${SECRET_KEY}")
+    private String SECRET_KEY;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -101,5 +109,14 @@ public class AuthenticationService {
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .build();
+    }
+
+    public void validateToken(final String token) {
+        Jwts.parserBuilder().setSigningKey(getSignKey()).build().parseClaimsJws(token);
+    }
+
+    private Key getSignKey() {
+        byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
+        return Keys.hmacShaKeyFor(keyBytes);
     }
 }

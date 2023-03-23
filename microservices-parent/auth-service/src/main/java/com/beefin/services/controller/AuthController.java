@@ -15,7 +15,6 @@ import java.util.concurrent.ExecutionException;
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
-@CrossOrigin("*")
 public class AuthController {
     @Autowired
     private final AuthenticationService authenticationService;
@@ -26,7 +25,6 @@ public class AuthController {
             return new ResponseEntity<AuthenticationResponse>(new AuthenticationResponse(), HttpStatus.BAD_REQUEST);
         }
 
-        //User createdUser = userService.createUser(userRequest);
         AuthenticationResponse response = authenticationService.register(userRequest);
 
         if (response == null) {
@@ -39,5 +37,11 @@ public class AuthController {
     @PostMapping("/authenticate")
     public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request) {
         return ResponseEntity.ok(authenticationService.authenticate(request));
+    }
+
+    @GetMapping("/validate")
+    public String validateToken(@RequestParam("token") String token) {
+        authenticationService.validateToken(token);
+        return "Token is valid";
     }
 }

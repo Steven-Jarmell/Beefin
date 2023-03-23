@@ -33,19 +33,10 @@ public class SecurityConfig {
 
     @Bean // Bean responsible for configuring all the Http security of the application
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .cors().configurationSource(request -> {
-                    CorsConfiguration configuration = new CorsConfiguration();
-                    configuration.setAllowedOrigins(List.of("http://localhost:3000"));
-                    configuration.setAllowedMethods(List.of("*"));
-                    configuration.setAllowedHeaders(List.of("*"));
-                    return configuration;
-                });
-
         http.csrf()
                 .disable() // Disable csrf verification
                 .authorizeHttpRequests()
-                .requestMatchers("/api/users/register", "/api/users/authenticate")
+                .requestMatchers("/api/auth/register", "/api/auth/authenticate")
                 .permitAll() // Allow for the whitelist paths to not require authentication
                 .anyRequest()
                 .authenticated() // Require anything not in the whitelist to be authenticated
