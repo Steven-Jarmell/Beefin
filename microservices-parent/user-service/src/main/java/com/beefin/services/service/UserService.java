@@ -14,7 +14,9 @@ import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -28,53 +30,7 @@ public class UserService {
 
     public static final String COL_NAME = "users";
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    /**
-     * Create Operation on User Entity
-     * @param userData UserRequest object containing the data from the request
-     * @return CONFLICT if duplicate exists, CREATED if successfully created, and INTERNAL_SERVER_ERROR if unexpected error
-     */
-    public User createUser(UserRequest userData) {
-        try {
-            Firestore db = FirestoreClient.getFirestore();
-
-            // Asynchronously check if user already exists in the database
-            ApiFuture<QuerySnapshot> future = db.collection(COL_NAME).whereEqualTo("email", userData.getEmail()).get();
-
-            // future.get() blocks on response
-            List<QueryDocumentSnapshot> documents = future.get().getDocuments();
-
-            boolean duplicate = documents.isEmpty();
-
-            // If user exists return CONFLICT
-            if (!duplicate) {
-                //return HttpStatus.CONFLICT;
-                return null;
-            } else {
-                // If they don't exist, add them and return CREATED
-                userData.setPassword(passwordEncoder.encode(userData.getPassword()));
-                ApiFuture<DocumentReference> addedDocRef = db.collection(COL_NAME).add(userData);
-
-                // Definitely a better way to do this
-                String addedDocId = addedDocRef.get().getId();
-
-                DocumentReference docRef = db.collection(COL_NAME).document(addedDocId);
-
-                ApiFuture<DocumentSnapshot> newFuture = docRef.get();
-
-                DocumentSnapshot document = newFuture.get();
-
-                return document.toObject(User.class);
-                //return HttpStatus.CREATED;
-            }
-        // If there's any unexpected error, print the stack trace and return INTERNAL_SERVER_ERROR
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
+    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     /**
      * Read Operation on User Entity
@@ -145,24 +101,28 @@ public class UserService {
 
             // Ensure the email won't conflict with another user's email
             // Asynchronously check if user with new email already exists in the database
-            ApiFuture<QuerySnapshot> duplicateUser = db.collection(COL_NAME).whereEqualTo("email", userData.getEmail()).get();
+            if (userData.getEmail() != null) {
+                ApiFuture<QuerySnapshot> duplicateUser = db.collection(COL_NAME).whereEqualTo("email", userData.getEmail()).get();
 
-            // future.get() blocks on response
-            List<QueryDocumentSnapshot> documents = duplicateUser.get().getDocuments();
+                // future.get() blocks on response
+                List<QueryDocumentSnapshot> documents = duplicateUser.get().getDocuments();
 
-            boolean conflict = documents.isEmpty();
+                boolean conflict = documents.isEmpty();
 
-            // If the email they try to update to already exists, return BAD_REQUEST
-            if (!conflict) {
-                return HttpStatus.BAD_REQUEST;
+                // If the email they try to update to already exists, return BAD_REQUEST
+                if (!conflict) {
+                    return HttpStatus.BAD_REQUEST;
+                }
+
             }
 
             Map<String, Object> updatedUser = new HashMap<>();
 
-            if (userData.getFirstName() != null) updatedUser.put("firstname", userData.getFirstName());
-            if (userData.getLastName() != null) updatedUser.put("lastname", userData.getLastName());
+            if (userData.getFirstName() != null) updatedUser.put("firstName", userData.getFirstName());
+            if (userData.getLastName() != null) updatedUser.put("lastName", userData.getLastName());
             if (userData.getEmail() != null) updatedUser.put("email", userData.getEmail());
-            if (userData.getPassword() != null) updatedUser.put("password", userData.getPassword());
+            if (userData.getPassword() != null) updatedUser.put("password", passwordEncoder.encode(userData.getPassword()));
+            if (userData.getRoles() != null) updatedUser.put("roles", userData.getRoles());
 
             // Get the user and update the attributes that have changed
             ApiFuture<WriteResult> collectionsApiFuture = db.collection(COL_NAME)
@@ -192,13 +152,7 @@ public class UserService {
                     .document(userID)
                     .delete();
 
-            // If delete goes through, return OK
-            if (deleteResult.isDone()) {
-                return HttpStatus.OK;
-            } else {
-            // Make sure the request deleting was valid as well
-                return HttpStatus.BAD_REQUEST;
-            }
+            return HttpStatus.OK;
         // If there is any error, return INTERNAL_SERVER_ERROR
         } catch (Exception e) {
             e.printStackTrace();
