@@ -17,11 +17,11 @@
     <packaging>pom</packaging>
     <modules>
         <module>user-service</module>
-        <module>workout-service</module>
         <module>group-service</module>
         <module>discovery-service</module>
         <module>api-gateway</module>
         <module>auth-service</module>
+        <module>exercise-service</module>
     </modules>
 
     <properties>
