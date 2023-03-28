@@ -38,7 +38,7 @@ public class UserController {
             List<UserResponse> allUsers = userService.getAllUsers();
 
             if (allUsers == null) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unexpected error occured while getting users");
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unexpected error occurred while getting users");
             } else {
                 return allUsers;
             }
