@@ -26,6 +26,10 @@ public class User {
 
     private boolean isVerified = true;
 
+    private float pointsEarned;
+
+    private List<Workout> workoutsCompleted;
+
     @ServerTimestamp
     private Date createdAt;
 
