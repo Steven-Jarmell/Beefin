@@ -31,9 +31,9 @@ public class User implements UserDetails {
 
     private List<String> roles;
 
-    private boolean isVerified = true;
+    private Boolean isVerified = true;
 
-    private float pointsEarned;
+    private Float pointsEarned;
 
     private List<Workout> workoutsCompleted;
 
@@ -50,7 +50,7 @@ public class User implements UserDetails {
         this.email = userData.getEmail();
         this.password = userData.getPassword();
         this.roles = userData.getRoles();
-        this.pointsEarned = 0;
+        this.pointsEarned = 0F;
         this.workoutsCompleted = new ArrayList<>();
     }
 

@@ -24,9 +24,9 @@ public class User {
 
     private List<String> roles;
 
-    private boolean isVerified = true;
+    private Boolean isVerified = true;
 
-    private float pointsEarned;
+    private Float pointsEarned;
 
     private List<Workout> workoutsCompleted;
 

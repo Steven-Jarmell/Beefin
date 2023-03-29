@@ -11,12 +11,12 @@ public class Exercise {
     private String name;
 
     // 0 if it is a compound lift, 1 if it is an accessory movement
-    private boolean compoundLift;
+    private Boolean compoundLift;
 
-    private int numSets;
+    private Integer numSets;
 
-    private int numRepsPerSet;
+    private Integer numRepsPerSet;
 
     // Average combined weight for the set
-    private float averageWeight;
+    private Float averageWeight;
 }

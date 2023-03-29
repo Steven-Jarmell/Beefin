@@ -19,6 +19,6 @@ public class UserRequest {
     private String email;
     private String password;
     private List<String> roles;
-    private float pointsEarned;
+    private Float pointsEarned;
     private Workout workoutCompleted;
 }
