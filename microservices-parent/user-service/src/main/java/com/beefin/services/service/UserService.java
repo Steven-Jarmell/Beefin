@@ -13,8 +13,8 @@ import com.beefin.services.model.User;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -28,53 +28,7 @@ public class UserService {
 
     public static final String COL_NAME = "users";
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    /**
-     * Create Operation on User Entity
-     * @param userData UserRequest object containing the data from the request
-     * @return CONFLICT if duplicate exists, CREATED if successfully created, and INTERNAL_SERVER_ERROR if unexpected error
-     */
-    public User createUser(UserRequest userData) {
-        try {
-            Firestore db = FirestoreClient.getFirestore();
-
-            // Asynchronously check if user already exists in the database
-            ApiFuture<QuerySnapshot> future = db.collection(COL_NAME).whereEqualTo("email", userData.getEmail()).get();
-
-            // future.get() blocks on response
-            List<QueryDocumentSnapshot> documents = future.get().getDocuments();
-
-            boolean duplicate = documents.isEmpty();
-
-            // If user exists return CONFLICT
-            if (!duplicate) {
-                //return HttpStatus.CONFLICT;
-                return null;
-            } else {
-                // If they don't exist, add them and return CREATED
-                userData.setPassword(passwordEncoder.encode(userData.getPassword()));
-                ApiFuture<DocumentReference> addedDocRef = db.collection(COL_NAME).add(userData);
-
-                // Definitely a better way to do this
-                String addedDocId = addedDocRef.get().getId();
-
-                DocumentReference docRef = db.collection(COL_NAME).document(addedDocId);
-
-                ApiFuture<DocumentSnapshot> newFuture = docRef.get();
-
-                DocumentSnapshot document = newFuture.get();
-
-                return document.toObject(User.class);
-                //return HttpStatus.CREATED;
-            }
-        // If there's any unexpected error, print the stack trace and return INTERNAL_SERVER_ERROR
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
+    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     /**
      * Read Operation on User Entity
@@ -119,6 +73,10 @@ public class UserService {
                 .lastName(user.getLastName())
                 .password(user.getPassword())
                 .roles(user.getRoles())
+                .workoutsCompleted(user.getWorkoutsCompleted())
+                .pointsEarned(user.getPointsEarned())
+                .friendsList(user.getFriendsList())
+                .groupsList(user.getGroupsList())
                 .build();
     }
 
@@ -167,11 +125,30 @@ public class UserService {
             if (userData.getEmail() != null) updatedUser.put("email", userData.getEmail());
             if (userData.getPassword() != null) updatedUser.put("password", passwordEncoder.encode(userData.getPassword()));
             if (userData.getRoles() != null) updatedUser.put("roles", userData.getRoles());
+            if (userData.getPointsEarned() != null) updatedUser.put("pointsEarned", userData.getPointsEarned());
 
             // Get the user and update the attributes that have changed
             ApiFuture<WriteResult> collectionsApiFuture = db.collection(COL_NAME)
                     .document(userData.getId())
                     .update(updatedUser);
+
+            // Confirm that data has been successfully saved by blocking on the operation
+            collectionsApiFuture.get();
+
+            // If you are adding a workout, append it to the user's list
+            if (userData.getWorkoutCompleted() != null) {
+                db.collection(COL_NAME)
+                        .document(userData.getId())
+                        .update("workoutsCompleted", FieldValue.arrayUnion(userData.getWorkoutCompleted()));
+            } else if (userData.getNewFriendId() != null) {
+                db.collection(COL_NAME)
+                        .document(userData.getId())
+                        .update("friendsList", FieldValue.arrayUnion(userData.getNewFriendId()));
+            } else if (userData.getNewGroupId() != null) {
+                db.collection(COL_NAME)
+                        .document(userData.getId())
+                        .update("groupsList", FieldValue.arrayUnion(userData.getNewGroupId()));
+            }
 
             // Ideally would want to check to make sure the update was successful, but the documentation is hard to find
             return HttpStatus.OK;
