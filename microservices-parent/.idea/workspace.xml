@@ -7,15 +7,6 @@
     <list default="true" id="31026bd0-076f-4ee6-bb41-f0684ebee65a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../client/src/LoginPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/LoginPage.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/beefin/services/dto/UserRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/beefin/services/dto/UserRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/beefin/services/dto/UserResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/beefin/services/dto/UserResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/beefin/services/model/Exercise.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/beefin/services/model/Exercise.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/beefin/services/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/beefin/services/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/beefin/services/dto/UserRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/beefin/services/dto/UserRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/beefin/services/dto/UserResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/beefin/services/dto/UserResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/beefin/services/model/Exercise.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/beefin/services/model/Exercise.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/beefin/services/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/beefin/services/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/beefin/services/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/beefin/services/service/UserService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +17,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -58,17 +50,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;19&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/jarme/Desktop/Beefin/microservices-parent/exercise-service&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "jdk.selected.JAVA_MODULE": "19",
+    "last_opened_file_path": "C:/Users/jarme/Desktop/Beefin/microservices-parent/group-service/src/main/resources",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.beefin.services.dto" />
@@ -76,11 +68,11 @@
       <recent name="com.beefin.services.model" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\jarme\Desktop\Beefin\microservices-parent\group-service\src\main\resources" />
       <recent name="C:\Users\jarme\Desktop\Beefin\microservices-parent\exercise-service" />
       <recent name="C:\Users\jarme\Desktop\Beefin\microservices-parent\exercise-service\src\main\resources" />
       <recent name="C:\Users\jarme\Desktop\Beefin\microservices-parent\exercise-service\src\main\java\com\beefin\services" />
       <recent name="C:\Users\jarme\Desktop\Beefin\microservices-parent" />
-      <recent name="C:\Users\jarme\Desktop\Beefin\microservices-parent\api-gateway\src\main\resources" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.beefin.services.model" />
