@@ -43,16 +43,30 @@
     background-color: #8970a2;
     color: white;
     font-size: 22px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    padding: 2%;
 }
 
 .current-streak-container > img{
     width: 200px;
     height: 200px;
+    margin: auto;
+    animation: colorChange 3s infinite;
 }
 
 .current-streak-container:hover{
     letter-spacing: 0.2em;
     animation: fireLetters 2s infinite ease-in;
+}
+
+
+@keyframes colorChange {
+    0%{fill:#ff0000}
+    50%{fill:#000}
+    100%{fill: #ff0000}
 }
 
 @keyframes fireLetters {

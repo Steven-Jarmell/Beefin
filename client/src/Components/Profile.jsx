@@ -34,7 +34,7 @@ const Profile = (props) => {
         <div className="rank-information">
           
           <div>
-            <img src={rank} alt="" fill="red" id='profilePic'/>
+            <img src={rank} fill='yellow' id='profilePic'/>
             {/* <rank_1 fill="red"></rank_1> */}
           
             <br />
@@ -50,7 +50,6 @@ const Profile = (props) => {
       <div className="stats-container">
         <div className="current-streak-container">
           <b>Current Streak: {props.currentStreak}</b>
-          <br />
           <img src={fire} alt="" />
         </div>
         <div className="current-xp-level-container">
