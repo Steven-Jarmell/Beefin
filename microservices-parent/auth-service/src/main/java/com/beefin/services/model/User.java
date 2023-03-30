@@ -7,6 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -30,7 +31,15 @@ public class User implements UserDetails {
 
     private List<String> roles;
 
-    private boolean isVerified = true;
+    private Boolean isVerified;
+
+    private Float pointsEarned;
+
+    private List<Workout> workoutsCompleted;
+
+    private List<String> friendsList;
+
+    private List<String> groupsList;
 
     @ServerTimestamp
     private Date createdAt;
@@ -45,6 +54,10 @@ public class User implements UserDetails {
         this.email = userData.getEmail();
         this.password = userData.getPassword();
         this.roles = userData.getRoles();
+        this.pointsEarned = 0F;
+        this.workoutsCompleted = new ArrayList<>();
+        this.friendsList = new ArrayList<>();
+        this.groupsList = new ArrayList<>();
     }
 
     // Methods for UserDetails class

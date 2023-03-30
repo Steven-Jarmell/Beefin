@@ -36,12 +36,25 @@ public class AuthController {
 
     @PostMapping("/authenticate")
     public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request) {
-        return ResponseEntity.ok(authenticationService.authenticate(request));
+        AuthenticationResponse response = authenticationService.authenticate(request);
+
+        // If the user is unverified or there was a server error, it might have returned null
+        if (response == null ) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/validate")
     public String validateToken(@RequestParam("token") String token) {
         authenticationService.validateToken(token);
         return "Token is valid";
+    }
+
+    @GetMapping("/verify")
+    public ResponseEntity<String> verifyUser(@RequestParam("id") String id) {
+        authenticationService.verifyUser(id);
+        return ResponseEntity.ok("Verified, you may now log in");
     }
 }

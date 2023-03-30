@@ -95,10 +95,10 @@ public class ExerciseService {
 
             // Ensure the name won't conflict
             if (exerciseRequest.getName() != null) {
-                ApiFuture<QuerySnapshot> duplicateUser = db.collection(COL_NAME).whereEqualTo("name", exerciseRequest.getName()).get();
+                ApiFuture<QuerySnapshot> duplicateExercise = db.collection(COL_NAME).whereEqualTo("name", exerciseRequest.getName()).get();
 
                 // future.get() blocks on response
-                List<QueryDocumentSnapshot> documents = duplicateUser.get().getDocuments();
+                List<QueryDocumentSnapshot> documents = duplicateExercise.get().getDocuments();
 
                 boolean conflict = documents.isEmpty();
 
@@ -114,7 +114,7 @@ public class ExerciseService {
             if (exerciseRequest.getName() != null) updatedExercise.put("name", exerciseRequest.getName());
             if (exerciseRequest != null) updatedExercise.put("compoundLift", exerciseRequest.isCompoundLift());
 
-            // Get the user and update the attributes that have changed
+            // Get the exercise and update the attributes that have changed
             ApiFuture<WriteResult> collectionsApiFuture = db.collection(COL_NAME)
                     .document(exerciseRequest.getId())
                     .update(updatedExercise);

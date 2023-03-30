@@ -13,8 +13,6 @@ import com.beefin.services.model.User;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -75,6 +73,10 @@ public class UserService {
                 .lastName(user.getLastName())
                 .password(user.getPassword())
                 .roles(user.getRoles())
+                .workoutsCompleted(user.getWorkoutsCompleted())
+                .pointsEarned(user.getPointsEarned())
+                .friendsList(user.getFriendsList())
+                .groupsList(user.getGroupsList())
                 .build();
     }
 
@@ -123,11 +125,30 @@ public class UserService {
             if (userData.getEmail() != null) updatedUser.put("email", userData.getEmail());
             if (userData.getPassword() != null) updatedUser.put("password", passwordEncoder.encode(userData.getPassword()));
             if (userData.getRoles() != null) updatedUser.put("roles", userData.getRoles());
+            if (userData.getPointsEarned() != null) updatedUser.put("pointsEarned", userData.getPointsEarned());
 
             // Get the user and update the attributes that have changed
             ApiFuture<WriteResult> collectionsApiFuture = db.collection(COL_NAME)
                     .document(userData.getId())
                     .update(updatedUser);
+
+            // Confirm that data has been successfully saved by blocking on the operation
+            collectionsApiFuture.get();
+
+            // If you are adding a workout, append it to the user's list
+            if (userData.getWorkoutCompleted() != null) {
+                db.collection(COL_NAME)
+                        .document(userData.getId())
+                        .update("workoutsCompleted", FieldValue.arrayUnion(userData.getWorkoutCompleted()));
+            } else if (userData.getNewFriendId() != null) {
+                db.collection(COL_NAME)
+                        .document(userData.getId())
+                        .update("friendsList", FieldValue.arrayUnion(userData.getNewFriendId()));
+            } else if (userData.getNewGroupId() != null) {
+                db.collection(COL_NAME)
+                        .document(userData.getId())
+                        .update("groupsList", FieldValue.arrayUnion(userData.getNewGroupId()));
+            }
 
             // Ideally would want to check to make sure the update was successful, but the documentation is hard to find
             return HttpStatus.OK;

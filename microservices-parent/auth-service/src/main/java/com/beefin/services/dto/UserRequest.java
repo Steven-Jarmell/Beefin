@@ -1,5 +1,6 @@
 package com.beefin.services.dto;
 
+import com.beefin.services.model.Workout;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,4 +19,8 @@ public class UserRequest {
     private String email;
     private String password;
     private List<String> roles;
+    private Float pointsEarned;
+    private Workout workoutCompleted;
+    private String newFriendId;
+    private String newGroupId;
 }

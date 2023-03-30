@@ -37,7 +37,7 @@ public class SecurityConfig {
         http.csrf()
                 .disable() // Disable csrf verification
                 .authorizeHttpRequests()
-                .requestMatchers("/api/auth/register", "/api/auth/authenticate")
+                .requestMatchers("/api/auth/register", "/api/auth/authenticate", "/api/auth/validate", "/api/auth/verify")
                 .permitAll() // Allow for the whitelist paths to not require authentication
                 .anyRequest()
                 .authenticated() // Require anything not in the whitelist to be authenticated
