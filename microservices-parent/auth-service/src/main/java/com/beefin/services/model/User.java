@@ -31,7 +31,7 @@ public class User implements UserDetails {
 
     private List<String> roles;
 
-    private Boolean isVerified = true;
+    private Boolean isVerified = false;
 
     private Float pointsEarned;
 

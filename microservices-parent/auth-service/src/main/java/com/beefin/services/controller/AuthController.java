@@ -1,9 +1,12 @@
 package com.beefin.services.controller;
 
+import com.beefin.services.config.EmailDetails;
+import com.beefin.services.config.EmailService;
 import com.beefin.services.dto.AuthenticationRequest;
 import com.beefin.services.dto.AuthenticationResponse;
 import com.beefin.services.dto.UserRequest;
 import com.beefin.services.service.AuthenticationService;
+import com.google.rpc.context.AttributeContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,12 +39,25 @@ public class AuthController {
 
     @PostMapping("/authenticate")
     public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request) {
-        return ResponseEntity.ok(authenticationService.authenticate(request));
+        AuthenticationResponse response = authenticationService.authenticate(request);
+
+        // If the user is unverified or there was a server error, it might have returned null
+        if (response == null ) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/validate")
     public String validateToken(@RequestParam("token") String token) {
         authenticationService.validateToken(token);
         return "Token is valid";
+    }
+
+    @GetMapping("/verify")
+    public ResponseEntity<String> verifyUser(@RequestParam("id") String id) {
+        authenticationService.verifyUser(id);
+        return ResponseEntity.ok("Verified, you may now log in");
     }
 }
