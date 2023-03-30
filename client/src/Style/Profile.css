@@ -4,7 +4,6 @@
 .profile-container{
     display: flex;
     text-align: center;
-    /* padding: 4vw; */
     border-radius: 50px;
     background-color: transparent;
     height: fit-content;
@@ -13,23 +12,62 @@
     
   }
 
-.profile-container-child{
-    flex: 1;
-    box-shadow: 2px 2px 2px 2px black;
+.profile-container > div{
     border-radius: 50px;
+    border: 2.5px solid #f7f7f7;
     margin: 1%;
-    background-color: #CCE6F4;
+    background-color: #8970a2;
+    color: white;
 }
 
+.rank-information{
+    width: 33%;
+    margin: 0 5%;
+}
+
+.profile-information{
+    width: 66%;
+    margin: 0 5%;
+}
 
 .stats-container{
     display: flex;
     width: 100;
-  }
+}
 
-.stats-container-child{
-    flex: 1;
-    margin: 2vw;
+.current-streak-container, .current-xp-level-container, .current-random-container{
+    width: 33%;
+    border: 2.5px solid #f7f7f7;
+    border-radius: 50px;
+    margin: 1%;
+    background-color: #8970a2;
+    color: white;
+    font-size: 22px;
+}
+
+.current-streak-container > img{
+    width: 200px;
+    height: 200px;
+}
+
+.current-streak-container:hover{
+    letter-spacing: 0.2em;
+    animation: fireLetters 2s infinite ease-in;
+}
+
+@keyframes fireLetters {
+    0%{
+        color: red;
+        text-shadow: 1px 1px 2px black;
+    }
+    50%{
+        color: orange;
+        text-shadow: 1px 1px 2px black;
+    }
+    100%{
+        color: red;
+        text-shadow: 1px 1px 2px black;
+    }
 }
 
 #profilePic {

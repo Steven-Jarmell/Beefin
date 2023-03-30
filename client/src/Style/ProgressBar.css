@@ -1,0 +1,24 @@
+.progressbar-visual-container {
+    background-color: rgb(233, 233, 233);
+    border-radius: 20px;
+    width: 75%;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    color: black;
+    border: 3px solid black;
+}
+.progressbar-visual-container:hover{
+    font-size: 10px;
+}
+
+.progressbar-visual {
+    background-color: #00bebc;
+    width: 100%;
+    border-radius: 15px;
+    position: absolute;
+    bottom: 0;
+    padding: 0;
+    margin: 0;
+    border-top: 3px solid black;
+}
