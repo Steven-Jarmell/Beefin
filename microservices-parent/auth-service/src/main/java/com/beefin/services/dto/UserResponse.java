@@ -21,4 +21,6 @@ public class UserResponse {
     private List<String> roles;
     private Float pointsEarned;
     private List<Workout> workoutsCompleted;
+    private List<String> friendsList;
+    private List<String> groupsList;
 }

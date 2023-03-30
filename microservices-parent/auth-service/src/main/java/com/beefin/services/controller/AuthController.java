@@ -1,12 +1,9 @@
 package com.beefin.services.controller;
 
-import com.beefin.services.config.EmailDetails;
-import com.beefin.services.config.EmailService;
 import com.beefin.services.dto.AuthenticationRequest;
 import com.beefin.services.dto.AuthenticationResponse;
 import com.beefin.services.dto.UserRequest;
 import com.beefin.services.service.AuthenticationService;
-import com.google.rpc.context.AttributeContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

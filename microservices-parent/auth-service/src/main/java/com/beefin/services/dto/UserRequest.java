@@ -21,4 +21,6 @@ public class UserRequest {
     private List<String> roles;
     private Float pointsEarned;
     private Workout workoutCompleted;
+    private String newFriendId;
+    private String newGroupId;
 }

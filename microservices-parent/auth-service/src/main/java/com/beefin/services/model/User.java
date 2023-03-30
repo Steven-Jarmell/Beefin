@@ -31,11 +31,15 @@ public class User implements UserDetails {
 
     private List<String> roles;
 
-    private Boolean isVerified = false;
+    private Boolean isVerified;
 
     private Float pointsEarned;
 
     private List<Workout> workoutsCompleted;
+
+    private List<String> friendsList;
+
+    private List<String> groupsList;
 
     @ServerTimestamp
     private Date createdAt;
@@ -52,6 +56,8 @@ public class User implements UserDetails {
         this.roles = userData.getRoles();
         this.pointsEarned = 0F;
         this.workoutsCompleted = new ArrayList<>();
+        this.friendsList = new ArrayList<>();
+        this.groupsList = new ArrayList<>();
     }
 
     // Methods for UserDetails class

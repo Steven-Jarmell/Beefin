@@ -75,6 +75,8 @@ public class UserService {
                 .roles(user.getRoles())
                 .workoutsCompleted(user.getWorkoutsCompleted())
                 .pointsEarned(user.getPointsEarned())
+                .friendsList(user.getFriendsList())
+                .groupsList(user.getGroupsList())
                 .build();
     }
 
@@ -138,6 +140,14 @@ public class UserService {
                 db.collection(COL_NAME)
                         .document(userData.getId())
                         .update("workoutsCompleted", FieldValue.arrayUnion(userData.getWorkoutCompleted()));
+            } else if (userData.getNewFriendId() != null) {
+                db.collection(COL_NAME)
+                        .document(userData.getId())
+                        .update("friendsList", FieldValue.arrayUnion(userData.getNewFriendId()));
+            } else if (userData.getNewGroupId() != null) {
+                db.collection(COL_NAME)
+                        .document(userData.getId())
+                        .update("groupsList", FieldValue.arrayUnion(userData.getNewGroupId()));
             }
 
             // Ideally would want to check to make sure the update was successful, but the documentation is hard to find

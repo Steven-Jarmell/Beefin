@@ -24,11 +24,15 @@ public class User {
 
     private List<String> roles;
 
-    private Boolean isVerified = true;
+    private Boolean isVerified;
 
     private Float pointsEarned;
 
     private List<Workout> workoutsCompleted;
+
+    private List<String> friendsList;
+
+    private List<String> groupsList;
 
     @ServerTimestamp
     private Date createdAt;

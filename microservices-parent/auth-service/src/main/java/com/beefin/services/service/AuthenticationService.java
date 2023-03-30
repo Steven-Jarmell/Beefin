@@ -23,6 +23,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -56,6 +57,11 @@ public class AuthenticationService {
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .roles(request.getRoles())
+                .isVerified(false)
+                .pointsEarned(0F)
+                .workoutsCompleted(new ArrayList<>())
+                .friendsList(new ArrayList<>())
+                .groupsList(new ArrayList<>())
                 .build();
 
         try {
