@@ -5,13 +5,18 @@ import rank_1 from "../assets/rank_1.svg";
 import rank_2 from "../assets/rank_2.svg";
 import rank_3 from "../assets/rank_3.svg";
 import rank_4 from "../assets/rank_4.svg";
+import rank_5 from "../assets/rank_5.svg";
+import rank_6 from "../assets/rank_6.svg";
+import rank_7 from "../assets/rank_7.svg";
+import rank_8 from "../assets/rank_8.svg";
+import rank_9 from "../assets/rank_9.svg";
+import rank_10 from "../assets/rank_10.svg";
 import fire from "../assets/fire.svg";
 
 const Profile = (props) => {
   var rank;
   switch (props.currentRank){
     case 1: 
-      console.log("here")
       rank=rank_1;
       break;
     case 2: 
@@ -23,9 +28,29 @@ const Profile = (props) => {
     case 4: 
       rank=rank_4;
       break;
+    case 4: 
+      rank=rank_4;
+      break;
+    case 5: 
+      rank=rank_5;
+      break;
+    case 6: 
+      rank=rank_6;
+      break;
+    case 7: 
+      rank=rank_7;
+      break;
+    case 8: 
+      rank=rank_8;
+      break;
+    case 9: 
+      rank=rank_9;
+      break;
+    case 10: 
+      rank=rank_10;
+      break;
   }
 
-  console.log(props.color)
   return (
     <div>
       <NavBar></NavBar>
@@ -34,7 +59,7 @@ const Profile = (props) => {
         <div className="rank-information">
           
           <div>
-            <img src={rank} fill='yellow' id='profilePic'/>
+            <img src={rank} fill='yellow' id='profilePic' />
             {/* <rank_1 fill="red"></rank_1> */}
           
             <br />
