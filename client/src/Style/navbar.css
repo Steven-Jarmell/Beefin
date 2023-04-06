@@ -1,6 +1,5 @@
 :root{
     display: flex;
-    
 }
 
 .navbar-container{
@@ -11,8 +10,15 @@
     max-width: 100%;
     border-radius: 50px;
     z-index: 1;
+    vertical-align: middle;
 }
 
+img{
+    height: 40px;
+    width: 40px;
+    float: right;
+    border-radius: 500px;
+}
 
 .navbar-buttons-container:hover{
     opacity: 1.0;
@@ -25,7 +31,9 @@
     padding: 1vw;
     border-radius: 50px;
     opacity: 0.4;
+    align-items: center
 }
+
 
 .left{
     margin-left: 0;
