@@ -1,0 +1,54 @@
+version: '3.7'
+
+services:
+  discovery-service:
+    image: stevenjarmell/discovery-service:latest
+    container_name: discovery-service
+    pull_policy: always
+    ports:
+      - "8761:8761"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+
+  api-gateway:
+    image: stevenjarmell/api-gateway:latest
+    container_name: api-gateway
+    pull_policy: always
+    ports:
+      - "8080:8080"
+    environment:
+      - LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_SECURITY=TRACE
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - discovery-service
+
+  auth-service:
+    image: stevenjarmell/auth-service:latest
+    container_name: auth-service
+    pull_policy: always
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - discovery-service
+      - api-gateway
+
+  exercise-service:
+    image: stevenjarmell/exercise-service:latest
+    container_name: exercise-service
+    pull_policy: always
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - discovery-service
+      - api-gateway
+
+  user-service:
+    image: stevenjarmell/user-service:latest
+    container_name: user-service
+    pull_policy: always
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - discovery-service
+      - api-gateway
+

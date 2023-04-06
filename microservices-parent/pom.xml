@@ -17,8 +17,8 @@
     <packaging>pom</packaging>
     <modules>
         <module>user-service</module>
-        <module>group-service</module>
         <module>discovery-service</module>
+        <module>group-service</module>
         <module>api-gateway</module>
         <module>auth-service</module>
         <module>exercise-service</module>
@@ -55,6 +55,19 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>3.3.1</version>
+                <configuration>
+                    <from><image>openjdk:19</image></from>
+                    <to>
+                        <image>
+                            registry.hub.docker.com/stevenjarmell/${project.artifactId}
+                        </image>
+                    </to>
                 </configuration>
             </plugin>
         </plugins>
