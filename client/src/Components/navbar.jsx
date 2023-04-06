@@ -9,10 +9,10 @@ const NavBar = (props) => {
       <div className="navbar-buttons-container">
         <img id="logo" src={logo} alt="" />
         <button className='left' onClick={()=> navigate('/')}> My Profile </button>
-        <button className='left' onClick={() => navigate('/join-group')}>Create/Join a Group</button>
-        <button className='left'><a href="">See Groups</a></button>
-        <button className='left'><a href="">Workouts</a></button>
-        <button className='right'><a href="">Logout</a></button>
+        <button className='left' onClick={() => navigate()}>Create/Join a Group</button>
+        <button className='left' onClick={() => navigate('/join-group')}>See Groups</button>
+        <button className='left'onClick={() => navigate()}>Workouts</button>
+        <button className='right'onClick={() => navigate()}>Logout</button>
       </div>
     </div>
   );
