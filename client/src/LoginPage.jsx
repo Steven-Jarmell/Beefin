@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./CSS/LoginPage.css";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
     const [email, setEmail] = useState("");
@@ -20,14 +20,21 @@ const LoginPage = () => {
                 "password": password
              })
         };
-
+        let token = ""
+        //Use /register route
+        //Send post of user reques
         fetch("http://localhost:8080/api/auth/authenticate", requestOptions)
-            .then((response) => response.text())
-            .then((result) => console.log(result))
+            .then((response) => response.json())
+            .then((result) => token = result.token)
             .catch((error) => console.log("error", error));
 
         setEmail("");
         setPassword("");
+
+        sessionStorage.setItem("token", token)
+
+        
+
     };
 
     return (

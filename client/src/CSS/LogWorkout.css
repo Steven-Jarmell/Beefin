@@ -1,0 +1,22 @@
+.selction {
+
+}
+
+.exercise{
+    background-color: #00bebc;
+    text-align: left;
+}
+
+.exercise h2 {
+    
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+
+}
+
+li {
+    display: inline;
+}
