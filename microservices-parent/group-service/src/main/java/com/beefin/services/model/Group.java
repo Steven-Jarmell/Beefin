@@ -2,20 +2,24 @@ package com.beefin.services.model;
 
 import com.google.cloud.firestore.annotation.DocumentId;
 import com.google.cloud.firestore.annotation.ServerTimestamp;
+import jdk.jfr.DataAmount;
 import lombok.*;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
+
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Data
+@AllArgsConstructor
+@Builder
+
 public class Group{
     private String id;
     private String name;
-    private String groupLeader;
+    private User groupLeader;
     private ArrayList<User> leaderBoard = new ArrayList<User>();
     private ArrayList<User> usersInvolved = new ArrayList<User>();
 
@@ -26,23 +30,25 @@ public class Group{
 
     public Group (String id,
                   String name,
-                  String groupLeader,
+                  User groupLeader,
                   ArrayList<User> leaderBoard,
                   ArrayList<User>usersInvolved){
         this.id = id;
         this.name = name;
         this.groupLeader = groupLeader;
         this.leaderBoard = leaderBoard;
-        this.usersInvolved = usersInvolved
+        this.usersInvolved = usersInvolved;
     }
     public ArrayList<User> getUsersInvolved(){
         return this.usersInvolved;
     }
-
-    public ArrayList<User> getLeaderboard() {
-        return this.leaderboard;
+    public String getId(){
+        return this.id;
     }
-    public ArrayList<User> getGroupLeader(){
+    public ArrayList<User> getLeaderboard() {
+        return this.leaderBoard;
+    }
+    public User getGroupLeader(){
         return this.groupLeader;
     }
     public void setLeaderboard(ArrayList<User> leaderBoard){
