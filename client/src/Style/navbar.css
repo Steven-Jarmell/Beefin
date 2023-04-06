@@ -13,7 +13,7 @@
     vertical-align: middle;
 }
 
-img{
+#logo{
     height: 40px;
     width: 40px;
     float: right;
@@ -34,6 +34,13 @@ img{
     align-items: center
 }
 
+button{
+    margin: 0 1.5%;
+}
+
+button > a{
+    color: white;
+}
 
 .left{
     margin-left: 0;

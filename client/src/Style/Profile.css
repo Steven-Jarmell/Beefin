@@ -92,3 +92,10 @@
 div{
     margin: 3vh 0vh;
 }
+
+#logo_big{
+    border-radius: 50px;
+    width: 350px;
+    height: 350px;
+    margin: auto;
+}

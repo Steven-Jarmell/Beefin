@@ -1,6 +1,8 @@
+import React from 'react';
 import NavBar from "../Components/navbar";
 import "../Style/Profile.css";
 import ProgressBar from "./ProgressBar";
+import {useNavigate} from "react-router-dom";
 import rank_1 from "../assets/rank_1.svg";
 import rank_2 from "../assets/rank_2.svg";
 import rank_3 from "../assets/rank_3.svg";
@@ -12,6 +14,7 @@ import rank_8 from "../assets/rank_8.svg";
 import rank_9 from "../assets/rank_9.svg";
 import rank_10 from "../assets/rank_10.svg";
 import fire from "../assets/fire.svg";
+import logo from "../assets/Beefin.png"
 
 const Profile = (props) => {
   var rank;
@@ -50,7 +53,7 @@ const Profile = (props) => {
       rank=rank_10;
       break;
   }
-
+  const navigate = useNavigate();
   return (
     <div>
       <NavBar></NavBar>
@@ -81,7 +84,7 @@ const Profile = (props) => {
         <ProgressBar currentPoints={props.currentPoints}></ProgressBar>
         </div>
         <div className="current-random-container">
-          <b>RANDOM: RANDOM</b>
+          <img id="logo_big" src={logo} alt="" />
         </div>
       </div>
     </div>
