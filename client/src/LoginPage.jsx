@@ -16,8 +16,8 @@ const LoginPage = () => {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                "email": email,
-                "password": password
+                "email": "sjj27@pitt.edu",
+                "password": "1234"
              })
         };
 

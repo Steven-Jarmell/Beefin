@@ -3,9 +3,7 @@ package com.beefin.services.service;
 import com.beefin.services.config.EmailDetails;
 import com.beefin.services.config.EmailService;
 import com.beefin.services.config.JwtService;
-import com.beefin.services.dto.AuthenticationRequest;
-import com.beefin.services.dto.AuthenticationResponse;
-import com.beefin.services.dto.UserRequest;
+import com.beefin.services.dto.*;
 import com.beefin.services.model.User;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
@@ -185,6 +183,70 @@ public class AuthenticationService {
         } catch (Exception e) {
             e.printStackTrace();
             return;
+        }
+    }
+
+    public void sendPasswordReset(String email) {
+        try {
+            Firestore db = FirestoreClient.getFirestore();
+
+            ApiFuture<QuerySnapshot> user = db.collection(COL_NAME).whereEqualTo("email", email).get();
+
+            //user.get().getDocuments().get(0).getId();
+
+            // future.get() blocks on response
+            List<QueryDocumentSnapshot> documents = user.get().getDocuments();
+
+            boolean userExists = !documents.isEmpty();
+
+            // If the user exists in the database, send them an email with a link to the reset password page
+            if (userExists) {
+                EmailDetails details = EmailDetails.builder()
+                        .recipient(email)
+                        .subject("DO NOT REPLY - Reset Password")
+                        .msgBody("Click this link to reset your account password: \n" +
+                                "http://localhost:5173/resetPassword?id=" + documents.get(0).getId())
+                        .build();
+
+                emailService.sendSimpleMail(details);
+
+                // On the front-end, have the user put in their new password, have them re-enter, ensure they match
+                // Then, send a post request to the server with their id and their new password so that it can update it
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void resetUserPassword(ResetPasswordRequest request) {
+        try {
+            Firestore db = FirestoreClient.getFirestore();
+
+            // Ensure the user exists
+            DocumentReference docRef = db.collection(COL_NAME).document(request.getId());
+            // asynchronously retrieve the document
+            ApiFuture<DocumentSnapshot> future = docRef.get();
+            // block on response
+            DocumentSnapshot document = future.get();
+
+            // If it does not exist, return BAD_REQUEST
+            if (!document.exists()) {
+                return;
+            }
+
+            Map<String, Object> updatedUser = new HashMap<>();
+
+            if (request.getNewPassword() != null) updatedUser.put("password", passwordEncoder.encode(request.getNewPassword()));
+
+            ApiFuture<WriteResult> collectionsApiFuture = db.collection(COL_NAME)
+                    .document(request.getId())
+                    .update(updatedUser);
+
+            // Confirm that data has been successfully saved by blocking on the operation
+            collectionsApiFuture.get();
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
