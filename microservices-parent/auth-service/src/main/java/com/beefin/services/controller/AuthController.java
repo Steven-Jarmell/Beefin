@@ -2,6 +2,7 @@ package com.beefin.services.controller;
 
 import com.beefin.services.dto.AuthenticationRequest;
 import com.beefin.services.dto.AuthenticationResponse;
+import com.beefin.services.dto.ResetPasswordRequest;
 import com.beefin.services.dto.UserRequest;
 import com.beefin.services.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
@@ -56,5 +57,17 @@ public class AuthController {
     public ResponseEntity<String> verifyUser(@RequestParam("id") String id) {
         authenticationService.verifyUser(id);
         return ResponseEntity.ok("Verified, you may now log in");
+    }
+
+    @PostMapping("/passwordResetRequest")
+    public ResponseEntity<String> sendResetPasswordEmail(@RequestBody ResetPasswordRequest request) {
+        authenticationService.sendPasswordReset(request.getEmail());
+        return ResponseEntity.ok("If the email is valid, a link will be sent to reset the password");
+    }
+
+    @PutMapping("/passwordReset")
+    public ResponseEntity<String> resetUsersPassword(@RequestBody ResetPasswordRequest request) {
+        authenticationService.resetUserPassword(request);
+        return ResponseEntity.ok("Password was reset");
     }
 }
