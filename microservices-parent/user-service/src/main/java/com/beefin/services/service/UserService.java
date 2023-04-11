@@ -183,18 +183,19 @@ public class UserService {
 
     /**
      * Method to get a single user from the database
-     * @param userID the ID of the user to retrieve
+     * @param userEmail the ID of the user to retrieve
      * @return ArrayList of size 1 with the User retrieved
      */
-    public List<UserResponse> getUser(String userID) {
+    public List<UserResponse> getUser(String userEmail) {
         try {
             Firestore db = FirestoreClient.getFirestore();
 
-            DocumentReference docRef = db.collection(COL_NAME).document(userID);
+            ApiFuture<QuerySnapshot> duplicateUser = db.collection(COL_NAME).whereEqualTo("email", userEmail).get();
 
-            ApiFuture<DocumentSnapshot> future = docRef.get();
+            // future.get() blocks on response
+            List<QueryDocumentSnapshot> documents = duplicateUser.get().getDocuments();
 
-            DocumentSnapshot document = future.get();
+            QueryDocumentSnapshot document = documents.get(0);
 
             if (document.exists()) {
                 UserResponse user = mapToUserResponse(document.getId(), document.toObject(User.class));

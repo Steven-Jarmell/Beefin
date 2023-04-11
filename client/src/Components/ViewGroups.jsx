@@ -1,6 +1,6 @@
-import "../Style/ViewGroups.css";
-import NavBar from "../Components/navbar";
-import Group from "../Components/Group";
+import "../CSS/ViewGroups.css";
+import NavBar from "./navbar";
+import Group from "./Group";
 
 
 const ViewGroups = (props) => {

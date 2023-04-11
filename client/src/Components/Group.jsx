@@ -1,4 +1,4 @@
-import "../Style/Group.css";
+import "../CSS/Group.css";
 
 
 const Group = (props) => {
