@@ -1,0 +1,31 @@
+.viewgroups-container{
+    display: flex;
+    text-align: center;
+    border-radius: 50px;
+    background-color: transparent;
+    height: fit-content;
+    color: black;
+    margin: 0 auto;
+    
+  }
+
+.viewgroups-container > div{
+    border-radius: 50px;
+    border: 2.5px solid #f7f7f7;
+    margin: 1%;
+    background-color: #8970a2;
+    color: white;
+}
+
+.left-container{
+    width: 50%;
+    margin: 0 5%;
+    border: 2px solid white;
+}
+
+.right-container{
+    width: 50%;
+    margin: 0 5%;
+    border: 2px solid white;
+}
+

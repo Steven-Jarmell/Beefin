@@ -1,0 +1,101 @@
+:root{
+    width: 94vw;
+}
+.profile-container{
+    display: flex;
+    text-align: center;
+    border-radius: 50px;
+    background-color: transparent;
+    height: fit-content;
+    color: black;
+    margin: 0 auto;
+    
+  }
+
+.profile-container > div{
+    border-radius: 50px;
+    border: 2.5px solid #f7f7f7;
+    margin: 1%;
+    background-color: #8970a2;
+    color: white;
+}
+
+.rank-information{
+    width: 33%;
+    margin: 0 5%;
+}
+
+.profile-information{
+    width: 66%;
+    margin: 0 5%;
+}
+
+.stats-container{
+    display: flex;
+    width: 100;
+}
+
+.current-streak-container, .current-xp-level-container, .current-random-container{
+    width: 33%;
+    border: 2.5px solid #f7f7f7;
+    border-radius: 50px;
+    margin: 1%;
+    background-color: #8970a2;
+    color: white;
+    font-size: 22px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    padding: 2%;
+}
+
+.current-streak-container > img{
+    width: 200px;
+    height: 200px;
+    margin: auto;
+    animation: colorChange 3s infinite;
+}
+
+.current-streak-container:hover{
+    letter-spacing: 0.2em;
+    animation: fireLetters 2s infinite ease-in;
+}
+
+
+@keyframes colorChange {
+    0%{fill:#ff0000}
+    50%{fill:#000}
+    100%{fill: #ff0000}
+}
+
+@keyframes fireLetters {
+    0%{
+        color: red;
+        text-shadow: 1px 1px 2px black;
+    }
+    50%{
+        color: orange;
+        text-shadow: 1px 1px 2px black;
+    }
+    100%{
+        color: red;
+        text-shadow: 1px 1px 2px black;
+    }
+}
+
+#profilePic {
+    width: 150px;
+    height: 150px;
+}
+
+div{
+    margin: 3vh 0vh;
+}
+
+#logo_big{
+    border-radius: 50px;
+    width: 350px;
+    height: 350px;
+    margin: auto;
+}

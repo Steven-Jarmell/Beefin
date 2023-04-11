@@ -1,0 +1,52 @@
+:root{
+    display: flex;
+}
+
+.navbar-container{
+    position: sticky;
+    top: 10px;
+    left: 0;
+    width: 100vw;
+    max-width: 100%;
+    border-radius: 50px;
+    z-index: 1;
+    vertical-align: middle;
+}
+
+#logo{
+    height: 40px;
+    width: 40px;
+    float: right;
+    border-radius: 500px;
+}
+
+.navbar-buttons-container:hover{
+    opacity: 1.0;
+    background-color: #353535;
+    z-index: 2;
+}
+
+.navbar-buttons-container{
+    width: 100;
+    padding: 1vw;
+    border-radius: 50px;
+    opacity: 0.4;
+    align-items: center
+}
+
+button{
+    margin: 0 1.5%;
+}
+
+button > a{
+    color: white;
+}
+
+.left{
+    margin-left: 0;
+}
+
+.right{
+    margin-left: 20%;
+}
+
