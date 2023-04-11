@@ -6,6 +6,7 @@ import Login from "./LoginPage";
 import Register from "./RegisterPage";
 import ViewGroups from "./Components/ViewGroups"
 import Profile from "./Components/Profile"
+import Layout from "./Components/Layout";
 
 function App() {
 
@@ -32,7 +33,9 @@ function App() {
                       <Route index element={<Landing />} />
                       <Route path="login" element={<Login />} />
                       <Route path="register" element={<Register />} />
-                      <Route path="profile" element={<Profile />}>
+                      <Route path="profile" element={<Layout />}>
+                        <Route index element={<Profile />} />
+                        {/* Add create/join group, see groups, workouts page routes here */}
                       </Route>
                     </Route>
                 </Routes>
