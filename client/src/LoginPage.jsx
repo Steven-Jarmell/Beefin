@@ -31,10 +31,8 @@ const LoginPage = () => {
         setEmail("");
         setPassword("");
 
-        sessionStorage.setItem("token", token)
-
+        sessionStorage.setItem("token", token);
         
-
     };
 
     return (
