@@ -1,4 +1,4 @@
-import '../Style/navbar.css'
+import '../CSS/navbar.css'
 import logo from "../assets/Beefin.png";
 import {useNavigate} from "react-router-dom";
 
