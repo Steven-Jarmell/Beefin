@@ -1,0 +1,56 @@
+.GroupPage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #242424;
+}
+
+.group-container {
+  display: flex;
+  width: 80%;
+  background-color: #242424;
+  height: fit-content;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.create-group-container {
+  width: 50%;
+  background-color: #8970a2;
+  padding: 20px;
+  border-radius: 10px;
+  margin-right: 20px;
+  border: 2px solid white;
+}
+
+.search-group-container {
+  width: 50%;
+  background-color: #8970a2;
+  padding: 20px;
+  border-radius: 10px;
+  margin-left: 20px;
+  border: 2px solid white;
+}
+
+.group-name {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.group-name h1 {
+  font-size: 36px;
+  font-weight: bold;
+  color: white;
+}
+
+button {
+  border-radius: 50px;
+  background-color: #00bebc;
+  color: white;
+}
+
+body {
+  background-color: #242424;
+  color: white;
+}
