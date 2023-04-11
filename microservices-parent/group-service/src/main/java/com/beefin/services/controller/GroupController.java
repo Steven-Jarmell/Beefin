@@ -1,6 +1,7 @@
 package com.beefin.services.controller;
 
 
+import com.beefin.services.dto.GroupRequest;
 import com.beefin.services.dto.GroupResponse;
 import com.beefin.services.service.GroupService;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +13,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.ExecutionException;
 
 @RestController
 @RequestMapping("/api/groups")
@@ -24,15 +24,12 @@ public class GroupController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<GroupResponse> getGroups(@RequestParam Optional<String> id) throws ExecutionException, InterruptedException {
+    public List<GroupResponse> getGroups(@RequestParam Optional<String> id) {
         if (id.isPresent()) {
             List<GroupResponse> group = groupService.getGroup(id.get());
 
             if (group == null) {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Group does not exist");
-
-
-
             }else{
                 return group;
             }
@@ -47,7 +44,33 @@ public class GroupController {
         }
     }
 
-    //write update group method
+    @PostMapping
+    public ResponseEntity<GroupResponse> createGroup(@RequestBody GroupRequest groupRequest) {
+        if (groupRequest.getGroupLeaderID() == null || groupRequest.getName() == null) {
+            return new ResponseEntity<GroupResponse>(new GroupResponse(), HttpStatus.BAD_REQUEST);
+        }
+
+        HttpStatus response = groupService.createGroup(groupRequest);
+
+        return new ResponseEntity<>(response);
+    }
+
+    @PutMapping
+    public ResponseEntity<String> updateGroup(@RequestBody GroupRequest groupRequest) {
+        if (groupRequest.getId() == null) {
+            return new ResponseEntity<>("Did not specify group ID in update", HttpStatus.BAD_REQUEST);
+        }
+
+        HttpStatus code = groupService.updateGroup(groupRequest);
+
+        if (code == HttpStatus.OK) {
+            return new ResponseEntity<String>("Group was updated successfully", code);
+        } else if (code == HttpStatus.BAD_REQUEST){
+            return new ResponseEntity<String>("Group Does not Exist", code);
+        } else {
+            return new ResponseEntity<String>("Unexpected error occurred while updating", code);
+        }
+    }
 
     @DeleteMapping
     public ResponseEntity<String> deleteGroup(@RequestParam String groupID){

@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -15,7 +14,6 @@ import java.util.List;
 public class GroupRequest {
     private String id;
     private String name;
-    private User groupLeader;
-    private ArrayList<User> leaderBoard = new ArrayList<User>();
-    private ArrayList<User> usersInvolved = new ArrayList<User>();
+    private String groupLeaderID;
+    private List<User> newGroupMember;
 }
