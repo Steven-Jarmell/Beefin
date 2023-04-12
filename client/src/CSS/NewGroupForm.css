@@ -1,0 +1,37 @@
+.group-form {
+    border: 1px solid white;
+    border-radius: 5px;
+    min-width: fit-content;
+    max-width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    height: 50%;
+    justify-content: space-between;
+    padding: 3rem;
+}
+
+.group-form-title {
+    font-size: 2.5rem;
+}
+
+.group-form-input {
+    text-align: center;
+}
+
+.group-form-label {
+
+}
+
+.group-form-text-input {
+    padding: 1rem;
+    margin-top: 10px;
+}
+
+.group-form-button {
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
