@@ -13,11 +13,20 @@
     vertical-align: middle;
 }
 
-#logo{
+.logo-button{
     height: 40px;
     width: 40px;
-    float: right;
-    border-radius: 500px;
+    float: left !important;
+    border-radius: 50px !important;
+    overflow: hidden !important;
+}
+
+.logo-button > img{
+    object-fit: scale-down;
+    border-radius: 50px !important;
+    transform: translate(-25px, -15px);
+    height: 50px;
+    width: 50px;
 }
 
 .navbar-buttons-container:hover{

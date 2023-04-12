@@ -57,32 +57,6 @@
     animation: colorChange 3s infinite;
 }
 
-.current-streak-container:hover{
-    letter-spacing: 0.2em;
-    animation: fireLetters 2s infinite ease-in;
-}
-
-
-@keyframes colorChange {
-    0%{fill:#ff0000}
-    50%{fill:#000}
-    100%{fill: #ff0000}
-}
-
-@keyframes fireLetters {
-    0%{
-        color: red;
-        text-shadow: 1px 1px 2px black;
-    }
-    50%{
-        color: orange;
-        text-shadow: 1px 1px 2px black;
-    }
-    100%{
-        color: red;
-        text-shadow: 1px 1px 2px black;
-    }
-}
 
 #profilePic {
     width: 150px;
