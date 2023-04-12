@@ -103,7 +103,7 @@ const Profile = (props) => {
             <h1>Hello, {name}</h1>
             <div className="profile-container">
                 <div className="rank-information">
-                    <div>
+                    <div className="rank-container">
                         <img src={rank} fill="yellow" id="profilePic" />
                         {/* <rank_1 fill="red"></rank_1> */}
 
