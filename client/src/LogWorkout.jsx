@@ -1,5 +1,6 @@
 import { useState } from "react";
 import './CSS/LogWorkout.css'
+import NavBar from "./Components/navbar";
 
 const LogWorkout = () => {
 
@@ -48,27 +49,48 @@ const LogWorkout = () => {
     });
 
     return (
-        <div>
+        <div className='logworkout-container'>
+            <NavBar></NavBar>
+
+            <div>
             <label htmlFor="Weight">Weight: </label>
             <input type="text" id = "Weight" value={weight} onChange={e => {
                                     setWeights(e.target.value);}}/>
 
+            </div>
+
+            <div>
             <label htmlFor="Sets">Sets: </label>
             <input type="text" id = "Sets" value={sets} onChange={e => {
                                     setSets(e.target.value);}}/>
 
+            </div>
+
+            <div>
             <label htmlFor="Reps">Reps: </label>
             <input type="text" id = "Reps" value={reps} onChange={e => {
                                     setReps(e.target.value);}}/>
             <br />
+            </div>
 
+            <div>
             <label htmlFor="search">Search: </label>
             <input type="text" id = "search" value={message} onChange={e => {
                                     setMessage(e.target.value);}}/>
 
+            </div>
+
+            <div>
             <label htmlFor="exercise">Exercise:</label>
             <input type="text" value={exercise} id="exercise"/>
 
+            </div>
+            
+            
+            
+
+            
+            
             <button onClick={e => logExercise(e)}>Add Exercise</button>
             <ul>
                 {typed.map(exe => 

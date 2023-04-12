@@ -7,23 +7,10 @@ import Register from "./RegisterPage";
 import ViewGroups from "./Components/ViewGroups"
 import Profile from "./Components/Profile"
 import Layout from "./Components/Layout";
+import LogWorkout from "./LogWorkout";
+import NavBar from "./Components/navbar";
 
 function App() {
-
-    const globalGroups = ["element_1", "global", "group"];
-    const myGroups = ["element_1_mygroup", "my", "groups"];
-    const members = [
-        "pratham",
-        "jim",
-        "steven",
-        "jon",
-        "stephen",
-        "pratham",
-        "jim",
-        "steven",
-        "jon",
-        "stephen",
-    ];
 
     return (
         <div>
@@ -32,11 +19,15 @@ function App() {
                     <Route path="/">
                       <Route index element={<Landing />} />
                       <Route path="login" element={<Login />} />
+                      <Route path="log-workouts" element={<LogWorkout />} />
+                      {/* <Route path="view-groups" element={<ViewGroups />} /> */}
                       <Route path="register" element={<Register />} />
-                      <Route path="profile" element={<Layout />}>
+                      <Route path="profile" element={<Profile />}>
+                      
                         <Route index element={<Profile />} />
                         {/* Add create/join group, see groups, workouts page routes here */}
-                      </Route>
+                       
+                        </Route>
                     </Route>
                 </Routes>
             </Router>

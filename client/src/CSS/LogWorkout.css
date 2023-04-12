@@ -1,10 +1,22 @@
-.selction {
+.logworkout-container{
+    height: 100vh;
+    margin: auto;
 
+}
+input, label{
+    font-size: 25px;
+}
+
+input{
+    margin-left: 1%;
+    padding-left: 1%;
+    border-radius: 50px;
 }
 
 .exercise{
     background-color: #00bebc;
-    text-align: left;
+    text-align: center;
+    border-radius: 50px;
 }
 
 .exercise h2 {
