@@ -100,7 +100,6 @@ const Profile = (props) => {
     const navigate = useNavigate();
     return (
         <div>
-          <NavBar></NavBar>
             <h1>Hello, {name}</h1>
             <div className="profile-container">
                 <div className="rank-information">

@@ -7,11 +7,10 @@ const NavBar = (props) => {
   return (
     <div className='navbar-container'>
       <div className="navbar-buttons-container">
-        <button className='logo-button' onClick={()=> navigate('/')}> <img id="logo" src={logo} alt="" /> </button>
-        
+         <img id="logo" className='logo-button' src={logo} alt="" />
         <button className='left' onClick={()=> navigate('/profile')}> My Profile </button>
-        <button className='left' onClick={() => navigate()}>Create/Join a Group</button>
-        <button className='left' onClick={() => navigate('/view-groups')}>See Groups</button>
+        <button className='left' onClick={() => navigate('/profile/createGroup')}>Create/Join a Group</button>
+        <button className='left' onClick={() => navigate('/profile/groups')}>See Groups</button>
         <button className='left'onClick={() => navigate('/log-workouts')}>Workouts</button>
         <button className='right'onClick={() => navigate()}>Logout</button>
       </div>
