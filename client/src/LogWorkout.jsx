@@ -3,6 +3,7 @@ import './CSS/LogWorkout.css'
 import NavBar from "./Components/navbar";
 import Exercise from "./Exercise";
 
+
 const LogWorkout = () => {
 
     const exercises = [
