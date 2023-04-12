@@ -12,7 +12,10 @@ const NavBar = (props) => {
         <button className='left' onClick={() => navigate('/profile/createGroup')}>Create Group</button>
         <button className='left' onClick={() => navigate('/profile/groups')}>See Groups</button>
         <button className='left'onClick={() => navigate('/log-workouts')}>Workouts</button>
-        <button className='right'onClick={() => navigate()}>Logout</button>
+        <button className='right'onClick={() => {
+            sessionStorage.clear();
+            navigate('/');
+            }}>Logout</button>
       </div>
     </div>
   );

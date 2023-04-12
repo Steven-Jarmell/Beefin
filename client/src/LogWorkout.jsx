@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import './CSS/LogWorkout.css'
-import Exercise from "./Exercise";
+//import Exercise from "./Exercise";
 
 const LogWorkout = () => {
 
