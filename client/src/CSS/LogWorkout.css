@@ -1,16 +1,30 @@
+.logworkout-container{
+    height: 100vh;
+    margin: auto;
+
+}
+input, label{
+    font-size: 25px;
+}
+
+input{
+    margin-left: 1%;
+    padding-left: 1%;
+    border-radius: 50px;
+}
+
+.exercise{
+    background-color: #00bebc;
+    text-align: center;
+    border-radius: 50px;
+}
+
+.exercise h2 {
+    
+}
+
 .selction {
 
-}
-
-
-ul {
-    list-style-type: none;
-    padding: 0;
-
-}
-
-li {
-    display: inline;
 }
 
 #prev {
@@ -30,4 +44,14 @@ li {
     background-color: blueviolet;
     width: 200px;
     height: 50px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+
+}
+
+li {
+    display: inline;
 }

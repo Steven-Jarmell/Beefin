@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./CSS/LoginPage.css";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
     const [email, setEmail] = useState("");
@@ -16,18 +16,23 @@ const LoginPage = () => {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                "email": email,
-                "password": password
+                "email": "sjj27@pitt.edu",
+                "password": "1234"
              })
         };
-
+        let token = ""
+        //Use /register route
+        //Send post of user reques
         fetch("http://localhost:8080/api/auth/authenticate", requestOptions)
-            .then((response) => response.text())
-            .then((result) => console.log(result))
+            .then((response) => response.json())
+            .then((result) => token = result.token)
             .catch((error) => console.log("error", error));
 
         setEmail("");
         setPassword("");
+
+        sessionStorage.setItem("token", token);
+        
     };
 
     return (

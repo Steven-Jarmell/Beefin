@@ -24,10 +24,10 @@ public class UserController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<UserResponse> getUsers(@RequestParam Optional<String> id) throws ExecutionException, InterruptedException {
+    public List<UserResponse> getUsers(@RequestParam Optional<String> email) throws ExecutionException, InterruptedException {
         // If a GET request is made with an id provided, only get that user if they exist
-        if (id.isPresent()) {
-            List<UserResponse> user = userService.getUser(id.get());
+        if (email.isPresent()) {
+            List<UserResponse> user = userService.getUser(email.get());
 
             if (user == null) {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User does not exist");
