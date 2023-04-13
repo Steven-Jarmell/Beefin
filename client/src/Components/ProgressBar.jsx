@@ -1,6 +1,8 @@
 import "../CSS/ProgressBar.css";
 
 const ProgressBar = (props) => {
+    var needed =  1000 - (props.currentPoints % 1000);
+    var current = props.currentPoints % 1000
     return (
         <div className="progressbar-container">
             <b>XP Until Next Level!</b>
@@ -8,12 +10,13 @@ const ProgressBar = (props) => {
                 className="progressbar-visual-container"
                 style={{ height: "25vh" }}
             >
-                Needed: {1000 - (props.currentPoints % 1000)}
+                {needed < 100 ? null : `Needed: ${needed}`}
+               
                 <div
                     className="progressbar-visual"
                     style={{ height: `${(props.currentPoints % 1000) / 40}vh` }}
                 >
-                    Current: {props.currentPoints % 1000}
+                    {current < 100 ? null : `Current: ${current}`}
                 </div>
             </div>
             +{" "}

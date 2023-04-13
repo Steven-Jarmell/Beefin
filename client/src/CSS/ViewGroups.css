@@ -6,7 +6,7 @@
     height: fit-content;
     color: black;
     margin: 0 auto;
-    
+    width: 100vw;
   }
 
 .viewgroups-container > div{
@@ -15,6 +15,7 @@
     margin: 1%;
     background-color: #8970a2;
     color: white;
+    height: fit-content;
 }
 
 .left-container{

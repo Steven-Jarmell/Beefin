@@ -27,7 +27,7 @@ const LoginPage = () => {
             .then((result) => {
                 token = result.token
                 sessionStorage.setItem("token", token);
-                navigate("/profile");
+                if (token) navigate("/profile");
             })
             .catch((error) => navigate("/login"));
 

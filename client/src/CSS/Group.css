@@ -2,8 +2,19 @@
     border: 3px solid black;
     border-radius: 45px;
     margin: 2% 15%;
-    background-color: #00bebc;
+    padding: 2% 20%;
+    /* background-color: #00bebc; */
+    text-align: center;
 }
-.group-name-anchor{
-    color: wheat
+
+.group-leader-button{
+    margin: auto;
+    text-align: center;
+    margin-bottom: 5%;
+}
+
+.group-name-button{
+    margin-bottom: 5%;
+    background-color: aquamarine;
+    color: black;
 }
