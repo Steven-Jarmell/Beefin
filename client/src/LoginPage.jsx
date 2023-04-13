@@ -6,18 +6,17 @@ const LoginPage = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    const navigate = useNavigate();
+
     const logInfo = (e) => {
         e.preventDefault();
-
-        console.log("Email:" + email);
-        console.log("Password:" + password);
 
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                "email": "sjj27@pitt.edu",
-                "password": "1234"
+                "email": email,
+                "password": password
              })
         };
         let token = ""
@@ -25,14 +24,15 @@ const LoginPage = () => {
         //Send post of user reques
         fetch("http://localhost:8080/api/auth/authenticate", requestOptions)
             .then((response) => response.json())
-            .then((result) => token = result.token)
-            .catch((error) => console.log("error", error));
+            .then((result) => {
+                token = result.token
+                sessionStorage.setItem("token", token);
+                if (token) navigate("/profile");
+            })
+            .catch((error) => navigate("/login"));
 
         setEmail("");
         setPassword("");
-
-        sessionStorage.setItem("token", token);
-        
     };
 
     return (
