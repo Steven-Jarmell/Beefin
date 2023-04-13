@@ -1,11 +1,12 @@
-.member-container{
+/* .member-container{
     border: 3px solid black;
     border-radius: 45px;
     margin: 1% 25%;
-    background-color: #00bebc;
-}
-.member-name-anchor{
-    color: wheat
+    background-color:#a76d60;
+} */
+.member-name-button{
+    color: wheat;
+    margin-bottom: 2%;
 }
 
 #first{
