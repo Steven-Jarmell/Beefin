@@ -76,7 +76,7 @@ const LogWorkout = () => {
 
 
     return (
-        <div>
+        <div className="logger">
             <button id="prev" onClick={() => dater(-1)}>Previous Day</button>
             <span id="date">{date.toUTCString().substring(0, 17)}</span>
             <button id="next" onClick={() => dater(1)}>Next Day</button>
