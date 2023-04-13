@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import Group from "./Group";
+import jwtDecode from "jwt-decode";
+import "../../CSS/GroupLayout.css";
 
 const GroupLayout = () => {
     const [groupList, setGroupList] = useState();
@@ -29,6 +31,7 @@ const GroupLayout = () => {
         fetch(`http://localhost:8080/api/groups`, requestOptions)
             .then((response) => response.json())
             .then((result) => {
+                setGroupList(result);
                 console.log(result);
             })
             .catch((error) => console.log("error", error));
@@ -38,7 +41,7 @@ const GroupLayout = () => {
         <Group
             key={i}
             name={group.name}
-            groupLeader={group.groupLeader}
+            groupLeader={group.groupLeaderID}
             groupMembers={group.groupMembers}
         />
     ));
@@ -63,10 +66,16 @@ const GroupLayout = () => {
 
 
     return (
-        <>
-            {allGroups ? allGroups : "No Groups"}
-            {myGroups}
-        </>
+        <div className="groups-container">
+            <div className="all-groups-container">
+                <p>All Groups</p>
+                {allGroups ? allGroups : "No Groups"}
+            </div>
+            <div className="my-groups-container">
+                <p>My Groups</p>
+                {myGroups}
+            </div>
+        </div>
     );
 };
 
