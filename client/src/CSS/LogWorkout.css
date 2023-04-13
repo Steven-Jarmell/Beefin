@@ -1,7 +1,20 @@
+.logger{
+    min-height: 1000px;
+    min-width: none;
+    align-items: center;
+    display: inline-block;
+    margin-left: 250px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+
 .logworkout-container{
     margin-top: 2%;
     height: 100vh;
 }
+
 input, label{
     font-size: 25px;
     margin-left: 1%;
@@ -16,14 +29,16 @@ input{
     border-radius: 50px;
 }
 
-.exercise{
-    background-color: #00bebc;
-    text-align: center;
-    border-radius: 50px;
+li {
+    display: inline;
 }
 
-.exercise h2 {
-    
+#prev {
+    margin-right: 100px;
+}
+
+#next {
+    margin-left: 100px;
 }
 
 .selction {
@@ -52,9 +67,15 @@ input{
 ul {
     list-style-type: none;
     padding: 0;
-
 }
 
-li {
-    display: inline;
+#date {
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.points {
+    background-color: blueviolet;
+    width: 200px;
+    height: 50px;
 }

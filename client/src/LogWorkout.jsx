@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import './CSS/LogWorkout.css'
-import NavBar from "./Components/navbar";
 import Exercise from "./Exercise";
-
 
 const LogWorkout = () => {
 
@@ -79,9 +77,7 @@ const LogWorkout = () => {
 
     return (
         <>
-        <NavBar></NavBar>
         <div className="logworkout-container">
-            
             <button id="prev" onClick={() => dater(-1)}>Previous Day</button>
             <span id="date">{date.toUTCString().substring(0, 17)}</span>
             <button id="next" onClick={() => dater(1)}>Next Day</button>
