@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import './CSS/LogWorkout.css'
 import Exercise from "./Exercise";
+import NavBar from "./Components/navbar";
 
 const LogWorkout = () => {
 
@@ -43,7 +44,7 @@ const LogWorkout = () => {
         /*setExercises([...exercises, e.target.value]);*/
         if(exercise.length > 0){
             setCount(count + 1);
-            setPoints(points + weight * reps * sets * mult);
+            setPoints(points + (weight * reps * sets * mult)/100);
             setAdd([...add, [exercise, weight, reps, sets]]);
         }
     }
@@ -58,10 +59,10 @@ const LogWorkout = () => {
 
     const dater = (i) => {
         let d = date;
-        if(i != -1){
+        if(i == 1){
             d.setTime(d.getTime() + 1000 * 60 * 60 * 24);
         }
-        else{
+        else if(i == -1){
             d.setTime(d.getTime() - 1000 * 60 * 60 * 24);
         }
         
@@ -72,11 +73,17 @@ const LogWorkout = () => {
         setDate(d);
         console.log(date);
         setCount(count + 1);
-    }
 
+        let exeList = [];
+        fetch("http://localhost:8080/api/exercises")
+            .then((response) => response.json())
+            .then((result) => exeList = result)
+            .catch((error) => console.log("error", error));
+    }
 
     return (
         <div className="logger">
+            <NavBar />
             <button id="prev" onClick={() => dater(-1)}>Previous Day</button>
             <span id="date">{date.toUTCString().substring(0, 17)}</span>
             <button id="next" onClick={() => dater(1)}>Next Day</button>

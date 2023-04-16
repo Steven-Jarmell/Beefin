@@ -6,6 +6,7 @@
 }
 .regisLabel {
     font-size: 40px;
+    margin-left: 60px;
 }
 
 .emailLabel {
@@ -45,13 +46,13 @@
 }
 
 .submitButton {
-    width: 100px;
+    width: 200px;
     height: 40px;
     background-color: #00bebc;
 }   
 
 .submitButton:hover {
-    width: 100px;
+    width: 200px;
     height: 40px;
     background-color: #fdd302;
 }

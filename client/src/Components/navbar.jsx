@@ -13,7 +13,7 @@ const NavBar = (props) => {
         <button className='left' onClick={() => navigate()}>Create/Join a Group</button>
         <button className='left' onClick={() => navigate('/view-groups')}>See Groups</button>
         <button className='left'onClick={() => navigate('/log-workouts')}>Workouts</button>
-        <button className='right'onClick={() => navigate()}>Logout</button>
+        <button className='right'onClick={() => navigate('/login')}>Logout</button>
       </div>
     </div>
   );

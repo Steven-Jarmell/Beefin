@@ -41,25 +41,30 @@ const RegisterPage = () => {
 
     return (
         <div className="Regis">
-            <p className='regisLabel'>Register</p>
+            <p className='regisLabel'>Register:</p>
             <form>
-                <p className='firstLabel'>First Name:</p>
-                <input type="text" id="firstName"
-                value={firstName} onChange={(e) => setFirstName(e.target.value)}/>
-                <p className='lastLabel'>Last Name:</p>
-                <input type="text" id="lastName"
-                value={lastName} onChange={(e) => setLastName(e.target.value)}/>
-                <p className='emailLabel'>Email:</p>
-                <input type="text" id="email"
-                value={email} onChange={(e) => setEmail(e.target.value)}/>
-                <br />
-                <p className='passLabel'>Password:</p>
+                <div className='first'>
+                    <label htmlFor="firstName">First Name:</label>
+                    <input type="text" id="firstName"
+                    value={firstName} onChange={(e) => setFirstName(e.target.value)}/>
+                </div>
+
+                <div className='last'>
+                    <label htmlFor="lastName">Last Name:</label>
+                    <input type="text" id="lastName"
+                    value={lastName} onChange={(e) => setLastName(e.target.value)}/>
+                </div>
+
+                <div className='email'>
+                    <label htmlFor="email">Email: </label>
+                    <input type="text" id="email"
+                    value={email} onChange={(e) => setEmail(e.target.value)}/>
+                </div>
+                <div className='pass'>
+                <label htmlFor="password">Password:</label>
                 <input type="text" id="password"
                 value={password} onChange={(e) => setPassword(e.target.value)}/>
-                <br />
-                <br />
-                <br />
-                <br />
+                </div>
                 <button className='submitButton' onClick={(e) => regInfo(e)}>Submit</button>
             </form>
 

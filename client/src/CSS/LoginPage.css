@@ -1,39 +1,28 @@
 
 .Login{
-    text-align: center;
-    margin: auto;
-    height: 100vh;
-    width: 90vw;
-}
-.passField {
-    display: inline;
+    margin-inline-start: 640px;
+    margin-bottom: 500px;
 }
 
 .loginLabel {
     font-size: 40px;
+    margin-left: 75px;
 }
 
-.emailLabel {
-    padding-right: 260px;
+label {
+    font-size: 20px;
+    margin-right:20px;
 }
 
-.passLabel {
-    padding-right: 225px;
-}
-
-#email {
-    width: 300px;
-    height: 20px;
-}
-
-#password {
-    width: 300px;
-    height: 20px;
+.email {
+    margin-left: 40px;
 }
 
 .submitButton {
     width: 100px;
     height: 40px;
+    margin-top: 20px;
+    margin-left:75px;
     background-color: #00bebc;
 }   
 

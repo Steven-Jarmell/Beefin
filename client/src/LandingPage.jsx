@@ -9,29 +9,23 @@ function LandingPage() {
     return (
         <div className='LandingPage'>
             <div className="left">
-            <p className="title">Beefin'</p>
-            <div className='log' >                      
-                <button onClick={() => navigate('/login')} id="login">Login</button> 
-            </div>
-            <div className='reg'>
+                <p className="title">Beefin'</p> 
+                <p className='Info'>
+                    Beefin' is workout trakcking service that allows you to connect to 
+                    your gym buddies by sharing your workouts and competing in group
+                    competitions. Too scared to talk to THAT person at the gym?
+                    Join their group show them what you're made of! Create some beefs,
+                    squash some beefs, but most importanly, make the gym fun agin. Now, get 
+                    moooving by logging in or regeristering.
+                </p>
+                <div className='buttons'>               
+                <button onClick={() => navigate('/login')} id="login">Login</button>
                 <button onClick={() => navigate('/register')} id="regis">Register</button> 
+                </div>
             </div>
-            <p className='Info'>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti, 
-                iure ullam! Veritatis nemo ut dolore 
-                voluptatibus suscipit, sed aperiam accusantium 
-                facilis corporis error quam libero atque ipsam commodi deleniti deserunt.
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
-                Ipsa modi id laudantium, quas iure nobis quod minus facere illum 
-                accusamus delectus
-                 odio voluptate distinctio placeat molestiae sunt assumenda dolorem corrupti.
-                 Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
-                 Aut incidunt reiciendis hic, quam voluptatum repellat sit officiis 
-                 perspiciatis obcaecati, quia dolorum iusto, saepe qui eius.
-                  Nemo explicabo odio illum ut?
-            </p>
+            <div className='rights'>
+                <img src={cow} alt="" id='cow'/>
             </div>
-            <img src={cow} alt="" />
         </div>
     );
 }
