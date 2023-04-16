@@ -128,12 +128,14 @@ public class UserService {
             if (userData.getPointsEarned() != null) updatedUser.put("pointsEarned", userData.getPointsEarned());
 
             // Get the user and update the attributes that have changed
-            ApiFuture<WriteResult> collectionsApiFuture = db.collection(COL_NAME)
-                    .document(userData.getId())
-                    .update(updatedUser);
+            if (!updatedUser.isEmpty()) {
+                ApiFuture<WriteResult> collectionsApiFuture = db.collection(COL_NAME)
+                        .document(userData.getId())
+                        .update(updatedUser);
 
-            // Confirm that data has been successfully saved by blocking on the operation
-            collectionsApiFuture.get();
+                // Confirm that data has been successfully saved by blocking on the operation
+                collectionsApiFuture.get();
+            }
 
             // If you are adding a workout, append it to the user's list
             if (userData.getWorkoutCompleted() != null) {

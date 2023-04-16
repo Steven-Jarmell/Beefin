@@ -69,6 +69,10 @@
                         <image>
                             registry.hub.docker.com/stevenjarmell/${project.artifactId}
                         </image>
+                        <auth>
+                            <username>stevenjarmell</username>
+                            <password>Uzikrocks55@</password>
+                        </auth>
                     </to>
                 </configuration>
             </plugin>
