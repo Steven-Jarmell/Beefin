@@ -53,6 +53,12 @@ button:hover {
   background: #00bebc;
 }
 
+button:disabled{
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: none;
+}
+
 
 button:focus,
 button:focus-visible {

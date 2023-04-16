@@ -17,11 +17,12 @@ import fire from "../assets/fire.svg";
 import logo from "../assets/Beefin.png";
 import jwtDecode from "jwt-decode";
 
-const Profile = (props) => {
+const Profile = () => {
     const [name, setName] = useState("");
     const [points, setPoints] = useState(0);
     const [rank, setRank] = useState("");
     const [streak, setStreak] = useState(0);
+    const [searchParams, setSearchParams] = useState("")
 
     useEffect(() => {
         let token = sessionStorage.getItem("token");
@@ -100,11 +101,10 @@ const Profile = (props) => {
     const navigate = useNavigate();
     return (
         <div>
-          <NavBar></NavBar>
             <h1>Hello, {name}</h1>
             <div className="profile-container">
                 <div className="rank-information">
-                    <div>
+                    <div className="rank-container">
                         <img src={rank} fill="yellow" id="profilePic" />
                         {/* <rank_1 fill="red"></rank_1> */}
 

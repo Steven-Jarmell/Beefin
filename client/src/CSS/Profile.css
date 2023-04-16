@@ -25,6 +25,10 @@
     margin: 0 5%;
 }
 
+.rank-container {
+    
+}
+
 .profile-information{
     width: 66%;
     margin: 0 5%;
@@ -61,10 +65,6 @@
 #profilePic {
     width: 150px;
     height: 150px;
-}
-
-div{
-    margin: 3vh 0vh;
 }
 
 #logo_big{
