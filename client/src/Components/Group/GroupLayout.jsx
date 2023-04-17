@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Group from "./Group";
+import GroupCard from "./GroupCard";
 import jwtDecode from "jwt-decode";
 import "../../CSS/GroupLayout.css";
 
@@ -38,10 +38,10 @@ const GroupLayout = () => {
     }, []);
 
     let allGroups = groupList?.map((group, i) => (
-        <Group
-            key={i}
+        <GroupCard
+            key={group.id}
+            gID={group.id}
             name={group.name}
-            groupLeader={group.groupLeaderID}
             groupMembers={group.groupMembers}
         />
     ));
@@ -56,23 +56,22 @@ const GroupLayout = () => {
     }
 
     let myGroups = groupsIn?.map((group, i) => (
-        <Group
-            key={i}
+        <GroupCard
+            key={group.id}
+            gID={group.id}
             name={group.name}
-            groupLeader={group.groupLeader}
             groupMembers={group.groupMembers}
         />
     ));
 
-
     return (
         <div className="groups-container">
             <div className="all-groups-container">
-                <p>All Groups</p>
+                <p className="group-list-title">All Groups</p>
                 {allGroups ? allGroups : "No Groups"}
             </div>
             <div className="my-groups-container">
-                <p>My Groups</p>
+                <p className="group-list-title">My Groups</p>
                 {myGroups}
             </div>
         </div>

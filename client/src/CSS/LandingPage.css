@@ -46,7 +46,6 @@
 }
 
 img {
-    display: inline-block;
     height: 400px;
 }
 
@@ -54,11 +53,17 @@ img {
     display: flex;
     width: 100%;
     align-items: center;
+    justify-content: center;
+    margin-top: auto;
+    margin-bottom: auto;
     gap: 10%;
 }
 
 .right-div {
     height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .left {
