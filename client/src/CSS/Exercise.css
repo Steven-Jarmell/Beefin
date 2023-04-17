@@ -1,6 +1,6 @@
 .type {
     background-color: #00bebc;
-    width: 200px;
+    width: 600px;
 }
 
 .sets{
@@ -27,5 +27,9 @@
 
 input {
     margin-right: 10px;
+}
+
+body{
+    display: flex;
 }
 

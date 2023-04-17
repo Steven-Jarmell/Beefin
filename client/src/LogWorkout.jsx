@@ -36,7 +36,9 @@ const LogWorkout = () => {
     const [date, setDate] = useState(new Date());
     const [points, setPoints] = useState(0);
     const [comp, setComp] = useState(false);
+    const [ide, setId] = useState(0);
 
+    //Ran when an exercise is added, update workout for the date
     const logExercise = (e) => {
         e.preventDefault();
         let mult = 1;
@@ -44,10 +46,14 @@ const LogWorkout = () => {
         /*setExercises([...exercises, e.target.value]);*/
         if(exercise.length > 0){
             setCount(count + 1);
+            setId(ide + 1);
 
-            setPoints(points + (weight * reps * sets * mult)/100);
-            setAdd([...add, [exercise, weight, reps, sets, comp]]);
+            console.log(ide);
+            let p = (weight * reps * sets * mult)/100;
+            setPoints(points + p);
+            setAdd([...add, [exercise, weight, reps, sets, comp, ide, p]]);
 
+            /*
             let token = sessionStorage.getItem("token");
             if (!token) return;
             let id = sessionStorage.getItem("id");
@@ -78,9 +84,11 @@ const LogWorkout = () => {
             fetch("http://localhost:8080/api/users", requestOptions)
             .then((response) => response.json())
             .catch((error) => console.log("error", error));
+            */
         }
     }
 
+    //Produces exercise options based on user input
     let typed = exercises.filter(exe => {
         if(message.length > 0){
             if(exe.label.includes(message)){
@@ -89,18 +97,16 @@ const LogWorkout = () => {
         }
     });
 
+    //Changes date and updates list of exercies
     const dater = (i) => {
         let d = date;
+        
         if(i == 1){
             d.setTime(d.getTime() + 1000 * 60 * 60 * 24);
         }
         else if(i == -1){
             d.setTime(d.getTime() - 1000 * 60 * 60 * 24);
         }
-        
-        /*
-            Add the backend stuff
-        */
 
         setDate(d);
         console.log(date);
@@ -109,6 +115,9 @@ const LogWorkout = () => {
         let token = sessionStorage.getItem("token");
         if (!token) return;
         var header = new Headers();
+        //Load workouts based on date
+
+        /*
         header.append(
             "Authorization",
             `Bearer ${token}`
@@ -119,13 +128,18 @@ const LogWorkout = () => {
             headers: header,
             redirect: "follow",
         };
-
-        //let exeList = [];
         fetch("http://localhost:8080/api/exercises", requestOptions)
             .then((response) => response.json())
             .then((result) => console.log(JSON.stringify(result)))
             .catch((error) => console.log("error", error));
+        */
     }
+
+    //Runs on intial load in
+    useEffect(() => {
+        console.log("loaded in");
+        //Fetch workout for the current date
+    }, []);
 
     return (
         <div className="logger">
@@ -171,6 +185,15 @@ const LogWorkout = () => {
                 <li className="exerciseList">
                     <div className="lister">
                         <Exercise className="exe" type={e[0]} weight={e[1]} reps={e[2]} sets={e[3]} />
+                        <button className='sub' onClick={
+                            () => {
+                                setAdd(add.filter(a =>
+                                    a[5] !== e[5]
+                                ));
+                                console.log(e[6]);
+                                setPoints(points - e[6]);
+                            }
+                        }>-</button>
                     </div>
                     <br />
                 </li>
