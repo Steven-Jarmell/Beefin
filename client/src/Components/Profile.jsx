@@ -55,6 +55,7 @@ const Profile = () => {
             .then((result) => {
                 if (result[0]) {
                     console.log(result);
+                    sessionStorage.setItem("id", result[0].id);
                     setName(() => result[0].firstName);
                     setPoints(() => result[0].pointsEarned);
                     setRank( () => {

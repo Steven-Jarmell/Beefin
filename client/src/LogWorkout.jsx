@@ -44,8 +44,40 @@ const LogWorkout = () => {
         /*setExercises([...exercises, e.target.value]);*/
         if(exercise.length > 0){
             setCount(count + 1);
+
             setPoints(points + (weight * reps * sets * mult)/100);
-            setAdd([...add, [exercise, weight, reps, sets]]);
+            setAdd([...add, [exercise, weight, reps, sets, comp]]);
+
+            let token = sessionStorage.getItem("token");
+            if (!token) return;
+            let id = sessionStorage.getItem("id");
+
+            var header = new Headers();
+            header.append(
+                "Authorization",
+                'Bearer ${token}',
+            );
+            const requestOptions = {
+                method: 'PUT',
+                headers: header,
+                redirect: "follow",
+                body: JSON.stringify({
+                    "id": id,
+                    "workoutCompleted": {
+                        "workoutDate": date,
+                        "exerciseList" : [{
+                            "name": exercise,
+                            "compoundLift" : comp,
+                            "numSets" : sets,
+                            "numRepsPerSet" : reps,
+                            "averageWeight" : weight
+                        }]
+                    }
+                 })
+            };
+            fetch("http://localhost:8080/api/users", requestOptions)
+            .then((response) => response.json())
+            .catch((error) => console.log("error", error));
         }
     }
 
@@ -74,16 +106,30 @@ const LogWorkout = () => {
         console.log(date);
         setCount(count + 1);
 
-        let exeList = [];
-        fetch("http://localhost:8080/api/exercises")
+        let token = sessionStorage.getItem("token");
+        if (!token) return;
+        var header = new Headers();
+        header.append(
+            "Authorization",
+            `Bearer ${token}`
+        );
+
+        const requestOptions = {
+            method: 'GET',
+            headers: header,
+            redirect: "follow",
+        };
+
+        //let exeList = [];
+        fetch("http://localhost:8080/api/exercises", requestOptions)
             .then((response) => response.json())
-            .then((result) => exeList = result)
+            .then((result) => console.log(JSON.stringify(result)))
             .catch((error) => console.log("error", error));
     }
 
     return (
-        <>
-        <div className="logworkout-container">
+        <div className="logger">
+            <NavBar />
             <button id="prev" onClick={() => dater(-1)}>Previous Day</button>
             <span id="date">{date.toUTCString().substring(0, 17)}</span>
             <button id="next" onClick={() => dater(1)}>Next Day</button>
@@ -101,6 +147,7 @@ const LogWorkout = () => {
             <input type="text" id = "Reps" value={reps} onChange={e => {
                                     setReps(e.target.value);}}/>
 
+            <br />
             <label htmlFor="search">Search: </label>
             <input type="text" id = "search" value={message} onChange={e => {
                                     setMessage(e.target.value);}}/>
@@ -121,16 +168,17 @@ const LogWorkout = () => {
             </ul>
             <ul>
                 {add.map(e => 
-                <li>
-                    <Exercise type={e[0]} weight={e[1]} reps={e[2]} sets={e[3]} />
+                <li className="exerciseList">
+                    <div className="lister">
+                        <Exercise className="exe" type={e[0]} weight={e[1]} reps={e[2]} sets={e[3]} />
+                    </div>
+                    <br />
                 </li>
                 )}
 
             </ul>
             <button className="points">{points}</button>
         </div>
-        </>
-        
     );
 }
 

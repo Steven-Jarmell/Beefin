@@ -5,7 +5,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 const LoginPage = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
+    const navigate = useNavigate();
     const logInfo = (e) => {
         e.preventDefault();
 
@@ -32,7 +32,6 @@ const LoginPage = () => {
         setEmail("");
         setPassword("");
 
-        sessionStorage.setItem("token", token);
         
     };
 
