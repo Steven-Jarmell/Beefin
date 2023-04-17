@@ -12,20 +12,20 @@ const LoginPage = () => {
         e.preventDefault();
 
         const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                "email": email,
-                "password": password
-             })
+                email: email,
+                password: password,
+            }),
         };
-        let token = ""
+        let token = "";
         //Use /register route
         //Send post of user reques
         fetch("http://localhost:8080/api/auth/authenticate", requestOptions)
             .then((response) => response.json())
             .then((result) => {
-                token = result.token
+                token = result.token;
                 sessionStorage.setItem("token", token);
                 if (token) navigate("/profile");
             })
@@ -38,31 +38,25 @@ const LoginPage = () => {
     return (
         <div className="Login">
             <p className="loginLabel">Login</p>
-            <form onSubmit={(e) => logInfo(e)}>
-                <label htmlFor="email">Email:</label>
+            <form onSubmit={(e) => logInfo(e)} className="login-form-container">
+                <label htmlFor="email">Email: </label>
                 <input
                     type="text"
                     id="email"
                     name="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Enter Email Here"
                 />
-                <br />
-                <label htmlFor="password">Password:</label>
+                <label htmlFor="password">Password: </label>
                 <input
                     type="text"
                     id="password"
                     name="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Enter Password Here"
                 />
-                <br />
-
-                <br />
-                <br />
-                <br />
-                <br />
-
                 <button className="submitButton" onClick={(e) => logInfo(e)}>
                     Submit
                 </button>

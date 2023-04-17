@@ -1,6 +1,7 @@
 :root{
     width: 94vw;
 }
+
 .profile-container{
     display: flex;
     text-align: center;
@@ -9,29 +10,39 @@
     height: fit-content;
     color: black;
     margin: 0 auto;
-    
+    width: 100%;
+    justify-content: center;
+    gap: 20px;
   }
 
 .profile-container > div{
     border-radius: 50px;
     border: 2.5px solid #f7f7f7;
-    margin: 1%;
     background-color: #8970a2;
     color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .rank-information{
-    width: 33%;
-    margin: 0 5%;
+
 }
 
 .rank-container {
-    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
 }
 
 .profile-information{
-    width: 66%;
-    margin: 0 5%;
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .stats-container{
@@ -64,7 +75,7 @@
 
 #profilePic {
     width: 150px;
-    height: 150px;
+    height: 175px;
 }
 
 #logo_big{
@@ -72,4 +83,15 @@
     width: 350px;
     height: 350px;
     margin: auto;
+}
+
+.main-profile-container {
+    width: 90vw;
+}
+
+.profile-info-points {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
 }

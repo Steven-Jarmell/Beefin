@@ -1,26 +1,18 @@
 import "../CSS/ProgressBar.css";
 
-const ProgressBar = (props) => {
+const ProgressBar = ({ currentPoints }) => {
     return (
         <div className="progressbar-container">
-            <b>XP Until Next Level!</b>
-            <div
-                className="progressbar-visual-container"
-                style={{ height: "25vh" }}
-            >
-                Needed: {1000 - (props.currentPoints % 1000)}
-                <div
-                    className="progressbar-visual"
-                    style={{ height: `${(props.currentPoints % 1000) / 40}vh` }}
-                >
-                    Current: {props.currentPoints % 1000}
-                </div>
+            <b>Points Until Next Level</b>
+            <div className="progressbar-visual">Needed: {1000 - (currentPoints % 1000)}</div>
+            <div className="progressbar-visual">
+                Current: {currentPoints % 1000}
             </div>
-            +{" "}
-            {Math.floor(props.currentPoints / 1000) > 1
-                ? Math.floor(props.currentPoints / 1000)
+            
+            + {Math.floor(currentPoints / 1000) > 1
+                ? Math.floor(currentPoints / 1000)
                 : 0}{" "}
-            Levels worth of XP
+            Levels worth of Points
         </div>
     );
 };

@@ -6,10 +6,12 @@
     position: sticky;
     top: 10px;
     left: 0;
-    width: 100vw;
     max-width: 100%;
     border-radius: 50px;
     z-index: 1;
+    width: 70vw;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .logo-button{
@@ -35,11 +37,15 @@
 }
 
 .navbar-buttons-container{
-    width: 100;
-    padding: 1vw;
     border-radius: 50px;
     opacity: 0.4;
-    align-items: center
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    height: 75px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 button{
@@ -50,11 +56,6 @@ button > a{
     color: white;
 }
 
-.left{
-    margin-left: 0;
+.navbar-button {
+    height: min-content;
 }
-
-.right{
-    margin-left: 20%;
-}
-
