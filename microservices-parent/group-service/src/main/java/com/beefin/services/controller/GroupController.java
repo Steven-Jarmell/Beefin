@@ -4,6 +4,7 @@ package com.beefin.services.controller;
 import com.beefin.services.dto.GroupRequest;
 import com.beefin.services.dto.GroupResponse;
 import com.beefin.services.service.GroupService;
+import com.google.api.Http;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -49,9 +50,9 @@ public class GroupController {
             return new ResponseEntity<String>("Bad Request", HttpStatus.BAD_REQUEST);
         }
 
-        HttpStatus response = groupService.createGroup(groupRequest);
+        String response = groupService.createGroup(groupRequest);
 
-        return new ResponseEntity<String>("Group Created", response);
+        return new ResponseEntity<String>(response, HttpStatus.OK);
     }
 
     @PutMapping

@@ -93,7 +93,7 @@ public class GroupService{
         }
     }
 
-    public HttpStatus createGroup(GroupRequest groupRequest) {
+    public String createGroup(GroupRequest groupRequest) {
         ArrayList<String> initialGroupList = new ArrayList<>();
         initialGroupList.add(groupRequest.getGroupLeaderID());
 
@@ -109,12 +109,12 @@ public class GroupService{
             ApiFuture<DocumentReference> addedDocRef = db.collection(COL_NAME).add(newGroup);
 
             // Block until the doc is added
-            addedDocRef.get();
+            //addedDocRef.get()
 
-            return HttpStatus.OK;
+            return addedDocRef.get().getId();
         } catch (Exception e) {
             e.printStackTrace();
-            return HttpStatus.INTERNAL_SERVER_ERROR;
+            return null;
         }
     }
 
