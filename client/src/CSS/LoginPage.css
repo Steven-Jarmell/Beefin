@@ -50,3 +50,8 @@
     background-color: #fdd302;
 }
 
+.login-toggle-pwd-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

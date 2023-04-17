@@ -35,6 +35,16 @@ const LoginPage = () => {
         setPassword("");
     };
 
+    function togglePassword() {
+        let target =  document.getElementById("password");
+        if (target.type === "password") {
+            target.type = "text";
+        }
+        else {
+            target.type = "password";
+        }
+    }
+
     return (
         <div className="Login">
             <p className="loginLabel">Login</p>
@@ -50,14 +60,18 @@ const LoginPage = () => {
                 />
                 <label htmlFor="password">Password: </label>
                 <input
-                    type="text"
+                    type="password"
                     id="password"
                     name="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Enter Password Here"
                 />
-                <button className="submitButton" onClick={(e) => logInfo(e)}>
+                <div className="login-toggle-pwd-button">
+                    <input type="checkbox" className="show-password-button" onClick={(e) => togglePassword(e)} />
+                    <p>Show Password</p>
+                </div>
+                <button className="submitButton" onClick={() => logInfo()}>
                     Submit
                 </button>
             </form>
