@@ -8,6 +8,6 @@ import LogWorkout from './LogWorkout'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <LogWorkout />
+    <App />
   </React.StrictMode>,
 )
