@@ -8,7 +8,6 @@ const Group = () => {
     const [userEmail, setUserEmail] = useState("");
     const [groupInformation, setGroupInformation] = useState([]);
     const [allUsers, setAllUsers] = useState([]);
-    const [toggle, setToggle] = useState(false);
     const [canJoinGroup, setCanJoinGroup] = useState(true);
 
     const navigate = useNavigate();
@@ -118,6 +117,10 @@ const Group = () => {
         }
     }
 
+    const onUserClicked = (userEmail) => {
+        navigate(`/profile/${userEmail}`)
+    }
+
     return groupInformation?.length === 0 ? (
         <h1>Loading...</h1>
     ) : (
@@ -151,7 +154,7 @@ const Group = () => {
                             <b className="group-member-attribute">Points:</b>{" "}
                             {member.pointsEarned}
                         </p>
-                        <BsBoxArrowUpRight />
+                        <BsBoxArrowUpRight onClick={() => onUserClicked(member.email)} />
                     </div>
                 ))}
             </div>

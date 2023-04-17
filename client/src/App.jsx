@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Landing from "./LandingPage";
@@ -10,6 +10,7 @@ import LogWorkout from "./LogWorkout";
 import GroupLayout from "./Components/Group/GroupLayout";
 import CreateGroupForm from "./Components/Group/CreateGroupForm";
 import Group from "./Components/Group/Group";
+import PublicProfile from "./Components/PublicProfile";
 
 function App() {
     return (
@@ -24,6 +25,7 @@ function App() {
                         <Route path="register" element={<Register />} />
                         <Route path="profile" element={<Layout />}>
                             <Route index element={<Profile />} />
+                            <Route path=":email" element={<PublicProfile />} />
                         </Route>
                         <Route path="groups" element={<Layout />}>
                             <Route index element={<GroupLayout />} />

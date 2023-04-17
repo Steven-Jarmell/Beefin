@@ -14,25 +14,21 @@ import rank_9 from "../assets/rank_9.svg";
 import rank_10 from "../assets/rank_10.svg";
 import fire from "../assets/fire.svg";
 import logo from "../assets/Beefin.png";
-import jwtDecode from "jwt-decode";
+import { useParams } from "react-router-dom";
 
-const Profile = () => {
+const PublicProfile = () => {
     const [name, setName] = useState("");
     const [points, setPoints] = useState(0);
     const [rank, setRank] = useState(1);
     const [rankImage, setRankImage] = useState("");
     const [streak, setStreak] = useState(0);
 
+    const { email } = useParams();
+
     useEffect(() => {
         let token = sessionStorage.getItem("token");
 
         if (!token) return;
-
-        const decoded = jwtDecode(token);
-
-        console.log(decoded);
-
-        const userEmail = decoded.sub;
 
         var myHeaders = new Headers();
         myHeaders.append("Authorization", `Bearer ${token}`);
@@ -44,7 +40,7 @@ const Profile = () => {
         };
 
         fetch(
-            `http://localhost:8080/api/users?email=${userEmail}`,
+            `http://localhost:8080/api/users?email=${email}`,
             requestOptions
         )
             .then((response) => response.json())
@@ -120,7 +116,7 @@ const Profile = () => {
     const navigate = useNavigate();
     return (
         <div className="main-profile-container">
-            <h1>Hello, {name}</h1>
+            <h1>{name}'s Profile</h1>
             <div className="profile-container">
                 <div className="rank-information">
                     <div className="rank-container">
@@ -147,6 +143,6 @@ const Profile = () => {
             </div>
         </div>
     );
-};
+}
 
-export default Profile;
+export default PublicProfile;
