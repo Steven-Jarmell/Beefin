@@ -5,12 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="31026bd0-076f-4ee6-bb41-f0684ebee65a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../client/src/CSS/GroupCard.css" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/CSS/GroupCard.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/CSS/GroupLayout.css" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/CSS/GroupLayout.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Components/Group/CreateGroupForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/Group/CreateGroupForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Components/Group/Group.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/Group/Group.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Components/Profile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/Profile.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/LoginPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/LoginPage.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/group-service/src/main/java/com/beefin/services/controller/GroupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/group-service/src/main/java/com/beefin/services/controller/GroupController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/beefin/services/model/Exercise.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/beefin/services/model/Exercise.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/beefin/services/model/Workout.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/beefin/services/model/Workout.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/beefin/services/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/beefin/services/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/group-service/src/main/java/com/beefin/services/service/GroupService.java" beforeDir="false" afterPath="$PROJECT_DIR$/group-service/src/main/java/com/beefin/services/service/GroupService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

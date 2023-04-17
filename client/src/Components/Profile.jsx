@@ -51,7 +51,8 @@ const Profile = () => {
             .then((response) => response.json())
             .then((result) => {
                 if (result[0]) {
-                    console.log(result[0])
+                    console.log(result[0]);
+                    sessionStorage.setItem("userID", result[0].id);
                     setName(result[0].firstName);
                     setPoints(result[0].pointsEarned);
                     setRank(points / 1000 > 0 ? points / 1000 : 1);

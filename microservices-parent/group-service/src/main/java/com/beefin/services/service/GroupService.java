@@ -136,16 +136,19 @@ public class GroupService{
 
             Map<String, Object> updatedGroup = new HashMap<>();
 
-            if (groupRequest.getName() != null) updatedGroup.put("name", groupRequest.getName());
-            if (groupRequest.getGroupLeaderID() != null) updatedGroup.put("groupLeaderID", groupRequest.getGroupLeaderID());
+            if (!updatedGroup.isEmpty()) {
+                if (groupRequest.getName() != null) updatedGroup.put("name", groupRequest.getName());
+                if (groupRequest.getGroupLeaderID() != null)
+                    updatedGroup.put("groupLeaderID", groupRequest.getGroupLeaderID());
 
-            // Get the user and update the attributes that have changed
-            ApiFuture<WriteResult> collectionsApiFuture = db.collection(COL_NAME)
-                    .document(groupRequest.getId())
-                    .update(updatedGroup);
+                // Get the user and update the attributes that have changed
+                ApiFuture<WriteResult> collectionsApiFuture = db.collection(COL_NAME)
+                        .document(groupRequest.getId())
+                        .update(updatedGroup);
 
-            // Confirm that data has been successfully saved by blocking on the operation
-            collectionsApiFuture.get();
+                // Confirm that data has been successfully saved by blocking on the operation
+                collectionsApiFuture.get();
+            }
 
             // If we are adding a member of the group, append to the list
             if (groupRequest.getNewGroupMember() != null) {

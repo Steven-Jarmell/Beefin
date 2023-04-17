@@ -71,7 +71,7 @@ const LoginPage = () => {
                     <input type="checkbox" className="show-password-button" onClick={(e) => togglePassword(e)} />
                     <p>Show Password</p>
                 </div>
-                <button className="submitButton" onClick={() => logInfo()}>
+                <button className="submitButton" onClick={() => logInfo(e)}>
                     Submit
                 </button>
             </form>

@@ -11,3 +11,8 @@
 .group-card-button:hover {
     cursor: pointer;
 }
+
+.group-member-card {
+    display: flex;
+    
+}
