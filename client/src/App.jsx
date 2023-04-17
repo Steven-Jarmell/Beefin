@@ -7,9 +7,9 @@ import Register from "./RegisterPage";
 import Profile from "./Components/Profile";
 import Layout from "./Components/Layout";
 import LogWorkout from "./LogWorkout";
-import NavBar from "./Components/navbar";
 import GroupLayout from "./Components/Group/GroupLayout";
 import CreateGroupForm from "./Components/Group/CreateGroupForm";
+import Group from "./Components/Group/Group";
 
 function App() {
     return (
@@ -24,9 +24,11 @@ function App() {
                         <Route path="register" element={<Register />} />
                         <Route path="profile" element={<Layout />}>
                             <Route index element={<Profile />} />
-                            {/* Add create/join group, see groups, workouts page routes here */}
-                            <Route path="groups" element={<GroupLayout />} />
+                        </Route>
+                        <Route path="groups" element={<Layout />}>
+                            <Route index element={<GroupLayout />} />
                             <Route path="createGroup" element={<CreateGroupForm />} />
+                            <Route path=":id" element={<Group />} />
                         </Route>
                     </Route>
                 </Routes>

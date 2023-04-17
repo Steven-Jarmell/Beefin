@@ -65,6 +65,8 @@ const RegisterPage = () => {
                 <input type="text" id="password"
                 value={password} onChange={(e) => setPassword(e.target.value)}/>
                 </div>
+                <br/>
+                <br/>
                 <button className='submitButton' onClick={(e) => regInfo(e)}>Submit</button>
             </form>
 

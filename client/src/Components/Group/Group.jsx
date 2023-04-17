@@ -1,15 +1,10 @@
-const Group = ({name, groupLeader,  groupMembers}) => {
+import { useParams } from "react-router-dom";
+
+const Group = () => {
+    const { id } = useParams();
+    console.log(id);
     return (
-        <div className="group-container">
-            <p>Name: {name}</p>
-            <p>Leader: {groupLeader}</p>
-            Members:
-            <ul>
-                {groupMembers.map((member, i) => (
-                    <li key={i}>{member}</li>
-                ))}
-            </ul>
-        </div>
+        <h1>Group</h1>
     )
 }
 

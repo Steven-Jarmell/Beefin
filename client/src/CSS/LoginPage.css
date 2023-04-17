@@ -1,7 +1,19 @@
 
 .Login{
-    margin-inline-start: 640px;
-    margin-bottom: 500px;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.login-form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.passField {
+    display: inline;
 }
 
 .loginLabel {
@@ -32,3 +44,8 @@ label {
     background-color: #fdd302;
 }
 
+.login-toggle-pwd-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

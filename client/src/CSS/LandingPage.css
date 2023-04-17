@@ -1,8 +1,10 @@
+.reg {
+    margin-top: 10px;
+}
+
 #login {
     background-color: #fdd302;
     color: #f9f9f9;
-    height: 100px;
-    width: 400px;
     font: bolder;
     font-size: 30px;
 }
@@ -10,8 +12,6 @@
 #login:hover {
     background-color:#f9f9f9;
     color: #242424;
-    height: 100px;
-    width: 400px;
     font: bolder;
     font-size: 30px;
 }
@@ -19,8 +19,6 @@
 #regis {
     background-color: #00bebc;
     color: #f9f9f9;
-    height: 100px;
-    width: 400px;
     font: bolder;
     font-size: 30px;
 }
@@ -28,16 +26,14 @@
 #regis:hover {
     background-color: #f9f9f9;
     color: #242424;
-    height: 100px;
-    width: 400px;
     font: bolder;
     font-size: 30px;
 }
 
 .Info {
+    text-align: center;
     color: #f9f9f9;
-    width: 400px;
-    margin-left: 25%;
+    font-size: 18px;
 }
 
 .title {
@@ -46,31 +42,53 @@
     font-size: 100px;
     text-decoration: underline;
     text-decoration-color: #00bebc;
-    margin: 0;
+    margin-top: 0;
 }
 
 img {
-    height: 600px;
-}
-
-.left{
-    display: inline;
-    margin: 0;
-}
-
-.rights {
-    margin-left: 0;
-    display: flex;
-}
-
-.buttons{
-    display: flex;
+    
+    height: 400px;
 }
 
 .LandingPage {
     display: flex;
-    margin: 0;
     width: 100%;
-    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+    margin-top: auto;
+    margin-bottom: auto;
+    gap: 10%;
 }
 
+.right-div {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.left {
+    display: flex;
+    flex-direction: column;
+}
+
+.landing-page-button-container {
+    width: 100%;
+}
+
+.landing-page-button {
+    width: 100%;
+}
+
+.left {
+    display: flex;
+    flex-direction: column;
+}
+
+.landing-page-button-container {
+    width: 100%;
+}
+
+.landing-page-button {
+    width: 100%;
+}
