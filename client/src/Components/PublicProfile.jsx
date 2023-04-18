@@ -47,10 +47,9 @@ const PublicProfile = () => {
             .then((result) => {
                 if (result[0]) {
                     console.log(result[0]);
-                    sessionStorage.setItem("userID", result[0].id);
                     setName(result[0].firstName);
                     setPoints(result[0].pointsEarned);
-                    setRank(points / 1000 > 0 ? points / 1000 : 1);
+                    setRank(result[0].pointsEarned / 1000 > 0 ? Math.floor(result[0].pointsEarned / 1000)+1 : 1);
                     let currentStreak = () => {
                         let streak = 0;
                         let workoutsCompleted = result[0].workoutsCompleted;
@@ -76,7 +75,8 @@ const PublicProfile = () => {
                     }
                     setStreak(currentStreak ? currentStreak : 0);
 
-                    switch (rank) {
+                    let curRank = (Math.floor(result[0].pointsEarned / 1000)) + 1;
+                    switch (curRank) {
                         case 1:
                             setRankImage(rank_1);
                             break;
