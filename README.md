@@ -3,7 +3,7 @@ Project for the Software Engineering Course at Pitt Spring 2023.
 
 *Full-Stack social media workout application*
 
-Features:
+## Features:
 - Log In/Register (with password encryption and email verification)
 - Authentication and Authorization with **JWT** through Auth Service
 - Create Groups
@@ -11,14 +11,14 @@ Features:
 - Create Workouts
 - View Past Workouts
 
-Technology Used:
+## Technology Used:
 - React
 - JavaScript
 - Java
 - Spring Boot
 - [Docker](https://hub.docker.com/u/stevenjarmell)
 
-How to run locally:  
+## How to run locally:  
 1. Must have [Node.js](https://nodejs.org/en) and [Docker](https://www.docker.com/) installed
 2. Clone this repository
 3. Open *two* terminals
