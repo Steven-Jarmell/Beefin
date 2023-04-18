@@ -26,22 +26,26 @@
 
 #lastName {
     width: 300px;
-    height: 20px;
+    height: 25px;
+    border-radius: 5px;
 }
 
 #firstName {
     width: 300px;
-    height: 20px;
+    height: 25px;
+    border-radius: 5px;
 }
 
 #email {
     width: 300px;
-    height: 20px;
+    height: 25px;
+    border-radius: 5px;
 }
 
 #password {
     width: 300px;
-    height: 20px;
+    height: 25px;
+    border-radius: 5px;
 }
 
 .submitButton {

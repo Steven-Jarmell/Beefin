@@ -1,14 +1,11 @@
-import { useState } from "react";
 import './CSS/Exercise.css'
 export default function Exercise({ type, sets, reps, weight }) {
     return(
-        <div>
-            <span className="bar">
-            <button className="type">{type}</button>
-            <button className="sets">Sets: {sets}</button>
-            <button className="reps">Reps: {reps}</button>
-            <button className="weight">Weight: {weight}</button>
-            </span>
+        <div className="exercise-container">
+            <p className="type exercise-button">{type}</p>
+            <p className="sets exercise-button">Sets: {sets}</p>
+            <p className="reps exercise-button">Reps: {reps}</p>
+            <p className="weight exercise-button">Weight: {weight}</p>
         </div>
-    );
+    )
 }

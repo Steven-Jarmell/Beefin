@@ -27,8 +27,10 @@
 .group-form-text-input {
     padding: .5rem;
     margin-top: 10px;
-    width: 55%;
+    width: 60%;
+    border-radius: 5px;
     margin-bottom: 10px;
+
 }
 
 .group-form-button {

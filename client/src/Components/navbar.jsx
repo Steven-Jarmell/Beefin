@@ -11,7 +11,7 @@ const NavBar = () => {
         <button className='left navbar-button' onClick={()=> navigate('/profile')}> My Profile </button>
         <button className='left navbar-button' onClick={() => navigate('/groups/createGroup')}>Create Group</button>
         <button className='left navbar-button' onClick={() => navigate('/groups/')}>See Groups</button>
-        <button className='left navbar-button'onClick={() => navigate('/log-workouts')}>Workouts</button>
+        <button className='left navbar-button'onClick={() => navigate('/workouts')}>Workouts</button>
         <button className='right navbar-button'onClick={() => {
             sessionStorage.clear();
             navigate('/');

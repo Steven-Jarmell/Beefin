@@ -1,74 +1,70 @@
 .logger{
-    min-height: 1000px;
-    min-width: none;
-    align-items: center;
-    display: inline-block;
-    margin-left: 250px;
+    height: 100%;
+    width: 100%;
+    margin-top: 20px;
 }
 
-ul {
-    list-style-type: none;
-    padding: 0;
+.logger-body-container {
+    margin-top: 10px;
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+.add-workout-container {
+    flex: 0.5;
+    height: 100%;
+}
+
+.workout-items-container {
+    flex: 0.5;
+}
 
 .logworkout-container{
     margin-top: 2%;
     height: 100vh;
 }
 
-input, label{
-    font-size: 25px;
-    margin-left: 1%;
-    padding-left: 1%;
-    margin-top: 2%;
-}
-
-input{
+.logworkout-input {
     margin-left: 1%;
     padding-left: 1%;
     margin-top: 2%;
     border-radius: 50px;
 }
 
-li {
-    display: inline;
+.logworkout-input, .logworkout-label {
+    font-size: 20px;
+    margin-left: 1%;
+    padding-left: 1%;
+    margin-top: 2%;
 }
 
-#prev {
-    margin-right: 100px;
-}
-
-#next {
-    margin-left: 100px;
-}
-
-.selction {
-
-}
-
-#prev {
-    margin-right: 100px;
-}
-
-#next {
-    margin-left: 100px;
-}
-
-#date {
-    font-size: 30px;
-    font-weight: 600;
-}
-
-.points {
-    background-color: blueviolet;
-    width: 200px;
-    height: 50px;
-}
-
-ul {
+.logworkout-list {
     list-style-type: none;
     padding: 0;
 }
 
+
+#prev {
+    margin-right: 100px;
+}
+
+#next {
+    margin-left: 100px;
+}
+
+.selection {
+    margin-top: 5px;
+}
+
+#prev {
+    margin-right: 100px;
+}
+
+#next {
+    margin-left: 100px;
+}
+
 #date {
     font-size: 30px;
     font-weight: 600;
@@ -78,4 +74,48 @@ ul {
     background-color: blueviolet;
     width: 200px;
     height: 50px;
+}
+
+#date {
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.points {
+    background-color: blueviolet;
+    width: 200px;
+    height: 50px;
+}
+
+.add-exercise-button {
+    margin-top: 10px;
+}
+
+.sub {
+    height: 50px;
+    width: 50px;
+}
+
+.sub:hover {
+    background-color: #da364b;
+    height: 50px;
+    width: 50px;
+}
+
+.logworkout-title {
+    font-size: 40px;
+    margin: 0;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #00bebc;
+}
+
+.lister {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    list-style: none;
 }

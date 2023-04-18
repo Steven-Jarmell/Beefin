@@ -32,6 +32,9 @@ function App() {
                             <Route path="createGroup" element={<CreateGroupForm />} />
                             <Route path=":id" element={<Group />} />
                         </Route>
+                        <Route path="workouts" element={<Layout />}>
+                            <Route index element={<LogWorkout />} />
+                        </Route>
                     </Route>
                 </Routes>
             </Router>
