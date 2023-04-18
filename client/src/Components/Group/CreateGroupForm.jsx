@@ -58,12 +58,41 @@ const CreateGroupForm = () => {
             };
 
             fetch("http://localhost:8080/api/groups", requestOptions)
-                .then((response) => response.json())
-                .then((result) => console.log(result))
+                .then((response) => response.text())
+                .then((result) => {
+                    var myHeaders = new Headers();
+                    myHeaders.append("Content-Type", "application/json");
+                    myHeaders.append(
+                        "Authorization",
+                        `Bearer ${token}`
+                    );
+
+                    let userID = sessionStorage.getItem("userID");
+                    console.log("User ID: " + userID);
+
+                    var raw = JSON.stringify({
+                        id: sessionStorage.getItem("userID"),
+                        newGroupId: result,
+                    });
+
+                    console.log(raw);
+        
+                    var requestOptions = {
+                        method: "PUT",
+                        headers: myHeaders,
+                        body: raw,
+                        redirect: "follow",
+                    };
+
+                    fetch("http://localhost:8080/api/users", requestOptions)
+                    .then((response) => response.text())
+                    .then((result) => console.log(result))
+                    .catch((error) => console.log("error", error))
+                })
                 .catch((error) => console.log("error", error));
         }
 
-        navigate("/profile/groups");
+        navigate("/groups");
     };
 
     return (

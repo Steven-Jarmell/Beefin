@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
-import Group from "./Group";
+import GroupCard from "./GroupCard";
+import jwtDecode from "jwt-decode";
+import "../../CSS/GroupLayout.css";
 
 const GroupLayout = () => {
     const [groupList, setGroupList] = useState();
@@ -29,16 +31,17 @@ const GroupLayout = () => {
         fetch(`http://localhost:8080/api/groups`, requestOptions)
             .then((response) => response.json())
             .then((result) => {
+                setGroupList(result);
                 console.log(result);
             })
             .catch((error) => console.log("error", error));
     }, []);
 
     let allGroups = groupList?.map((group, i) => (
-        <Group
-            key={i}
+        <GroupCard
+            key={group.id}
+            gID={group.id}
             name={group.name}
-            groupLeader={group.groupLeader}
             groupMembers={group.groupMembers}
         />
     ));
@@ -53,19 +56,25 @@ const GroupLayout = () => {
     }
 
     let myGroups = groupsIn?.map((group, i) => (
-        <Group
-            key={i}
+        <GroupCard
+            key={group.id}
+            gID={group.id}
             name={group.name}
-            groupLeader={group.groupLeader}
             groupMembers={group.groupMembers}
         />
     ));
 
     return (
-        <>
-            {allGroups ? allGroups : "No Groups"}
-            {myGroups}
-        </>
+        <div className="groups-container">
+            <div className="all-groups-container">
+                <p className="group-list-title">All Groups</p>
+                {allGroups ? allGroups : "No Groups"}
+            </div>
+            <div className="my-groups-container">
+                <p className="group-list-title">My Groups</p>
+                {myGroups}
+            </div>
+        </div>
     );
 };
 

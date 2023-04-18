@@ -6,64 +6,72 @@ const LoginPage = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    const navigate = useNavigate();
+
     const logInfo = (e) => {
         e.preventDefault();
 
-        console.log("Email:" + email);
-        console.log("Password:" + password);
-
         const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                "email": "sjj27@pitt.edu",
-                "password": "1234"
-             })
+                email: email,
+                password: password,
+            }),
         };
-        let token = ""
+        let token = "";
         //Use /register route
         //Send post of user reques
         fetch("http://localhost:8080/api/auth/authenticate", requestOptions)
             .then((response) => response.json())
-            .then((result) => token = result.token)
-            .catch((error) => console.log("error", error));
+            .then((result) => {
+                token = result.token;
+                sessionStorage.setItem("token", token);
+                if (token) navigate("/profile");
+            })
+            .catch((error) => navigate("/login"));
 
         setEmail("");
         setPassword("");
-
-        sessionStorage.setItem("token", token);
-        
     };
+
+    function togglePassword() {
+        let target =  document.getElementById("password");
+        if (target.type === "password") {
+            target.type = "text";
+        }
+        else {
+            target.type = "password";
+        }
+    }
 
     return (
         <div className="Login">
             <p className="loginLabel">Login</p>
-            <form onSubmit={(e) => logInfo(e)}>
-                <label htmlFor="email">Email:</label>
+            <form onSubmit={(e) => logInfo(e)} className="login-form-container">
+                <label htmlFor="email">Email: </label>
                 <input
                     type="text"
                     id="email"
                     name="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Enter Email Here"
                 />
-                <br />
-                <label htmlFor="password">Password:</label>
+                <label htmlFor="password">Password: </label>
                 <input
-                    type="text"
+                    type="password"
                     id="password"
                     name="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Enter Password Here"
                 />
-                <br />
-
-                <br />
-                <br />
-                <br />
-                <br />
-
-                <button className="submitButton" onClick={(e) => logInfo(e)}>
+                <div className="login-toggle-pwd-button">
+                    <input type="checkbox" className="show-password-button" onClick={(e) => togglePassword(e)} />
+                    <p>Show Password</p>
+                </div>
+                <button className="submitButton" onClick={() => logInfo(e)}>
                     Submit
                 </button>
             </form>

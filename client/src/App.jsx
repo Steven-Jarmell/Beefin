@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Landing from "./LandingPage";
@@ -7,9 +7,10 @@ import Register from "./RegisterPage";
 import Profile from "./Components/Profile";
 import Layout from "./Components/Layout";
 import LogWorkout from "./LogWorkout";
-import NavBar from "./Components/navbar";
 import GroupLayout from "./Components/Group/GroupLayout";
 import CreateGroupForm from "./Components/Group/CreateGroupForm";
+import Group from "./Components/Group/Group";
+import PublicProfile from "./Components/PublicProfile";
 
 function App() {
     return (
@@ -24,9 +25,15 @@ function App() {
                         <Route path="register" element={<Register />} />
                         <Route path="profile" element={<Layout />}>
                             <Route index element={<Profile />} />
-                            {/* Add create/join group, see groups, workouts page routes here */}
-                            <Route path="groups" element={<GroupLayout />} />
+                            <Route path=":email" element={<PublicProfile />} />
+                        </Route>
+                        <Route path="groups" element={<Layout />}>
+                            <Route index element={<GroupLayout />} />
                             <Route path="createGroup" element={<CreateGroupForm />} />
+                            <Route path=":id" element={<Group />} />
+                        </Route>
+                        <Route path="workouts" element={<Layout />}>
+                            <Route index element={<LogWorkout />} />
                         </Route>
                     </Route>
                 </Routes>

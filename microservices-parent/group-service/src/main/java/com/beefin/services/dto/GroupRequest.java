@@ -15,5 +15,5 @@ public class GroupRequest {
     private String id;
     private String name;
     private String groupLeaderID;
-    private List<User> newGroupMember;
+    private String newGroupMember;
 }
