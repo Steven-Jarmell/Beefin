@@ -17,3 +17,13 @@ Technology Used:
 - Java
 - Spring Boot
 - [Docker](https://hub.docker.com/u/stevenjarmell)
+
+How to run locally:  
+1. Must have [Node.js](https://nodejs.org/en) and [Docker](https://www.docker.com/) installed
+2. Clone this repository
+3. Open *two* terminals
+4. In terminal one, cd into the `microservices-parent` folder and run `docker compose up -d`
+5. In terminal two, cd into the `client` folder and run `npm run dev`
+6. Give the backend a minute to initialize, and then feel free to use the website!
+
+# Thank You!
