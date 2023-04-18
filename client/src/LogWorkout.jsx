@@ -134,7 +134,7 @@ const LogWorkout = () => {
                 : "0" + (date.getMonth() + 1);
         const day =
             date.getDate() >= 10
-                ? date.getDate() + 1
+                ? date.getDate()
                 : "0" + (date.getDate() + 1);
         const dateAsString = date.getFullYear() + "-" + month + "-" + day;
 
