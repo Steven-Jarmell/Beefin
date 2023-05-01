@@ -3,6 +3,10 @@ Project for the Software Engineering Course at Pitt Spring 2023.
 
 *Full-Stack social media workout application*
 
+## Demo:
+
+https://user-images.githubusercontent.com/76745546/235535991-6e61b1c4-163e-4a71-b64e-eaba3148287e.mp4
+
 ## Features:
 - Log In/Register (with password encryption and email verification)
 - Authentication and Authorization with **JWT** through Auth Service
